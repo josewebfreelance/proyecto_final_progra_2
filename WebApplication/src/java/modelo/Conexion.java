@@ -16,13 +16,13 @@ public class Conexion {
     private final String sgdb="mysql";
     private final String servidor="localhost";
     private final String puerto =":3306";
-    private final String bd="dbescuela";
+    private final String bd="dbempresa";
     private final String urlConexion = "jdbc:"+sgdb +"://"+servidor+puerto+"/"+bd; 
     private final String usuario ="root";
     private final String contra ="";
     private final String jdbc ="com.mysql.jdbc.Driver";
     
-    public void AbrirConexion(){
+    public void abrirConexion(){
     try{
         Class.forName(jdbc);
         conexionBD = DriverManager.getConnection(urlConexion,usuario,contra);

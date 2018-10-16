@@ -24,6 +24,7 @@
                     <label for="contrasenia">Contrase&ntilde;a</label>
                     <input type="password" class="form-control" id="contrasenia" placeholder="Contrase&ntilde;a">
                 </div>
+                <a href="usuarios/usuarios.jsp">Registrarse</a>
                 <button type="submit" class="btn btn-primary">Ingresar</button>
             </form>
         </div>
