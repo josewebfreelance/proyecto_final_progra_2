@@ -15,6 +15,7 @@
     <body>
         <div class="container-fluid">
             <form action="sr_usuario" method="get"  class="offset-4 col-4">
+                <input type="hidden" name="pantalla" value="registrar">
                 <div class="form-group">
                     <label for="usuario">Usuario</label>
                     <input type="text" class="form-control" name="txt_usuario" placeholder="Nombre de usuario">

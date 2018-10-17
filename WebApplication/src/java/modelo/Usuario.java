@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -43,17 +44,21 @@ public class Usuario {
     public int registrar() throws NoSuchAlgorithmException {
         int retorno = 0;
         try {
-            clsConectar = new Conexion();
-            clsConectar.abrirConexion();
-            String query;
-            query = "Insert into usuarios(usuario, contrasenia)"
-                    + "values(?,?)";
-            parametro = (PreparedStatement) clsConectar.conexionBD.prepareStatement(query);
-            parametro.setString(1, getUsuario());
-            parametro.setString(2, sha256(getContrasenia()));
-            int executar = parametro.executeUpdate();
-            clsConectar.cerrarConexion();
-            retorno = executar;
+            if (getUsuario() != "" && getContrasenia() != "") {
+                clsConectar = new Conexion();
+                clsConectar.abrirConexion();
+                String query;
+                query = "Insert into usuarios(usuario, contrasenia)"
+                        + "values(?,?)";
+                parametro = (PreparedStatement) clsConectar.conexionBD.prepareStatement(query);
+                parametro.setString(1, getUsuario());
+                parametro.setString(2, sha256(getContrasenia()));
+                int executar = parametro.executeUpdate();
+                clsConectar.cerrarConexion();
+                retorno = executar;
+            } else {
+                retorno = 0;
+            }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(
@@ -62,6 +67,31 @@ public class Usuario {
                     JOptionPane.ERROR_MESSAGE);
         }
 
+        return retorno;
+    }
+
+    public int iniciarSesion() throws NoSuchAlgorithmException, SQLException {
+        int retorno;
+        String contraseniaIngresada = sha256(getContrasenia());
+
+        if (getUsuario() != "" && getContrasenia() != "") {
+            clsConectar = new Conexion();
+            clsConectar.abrirConexion();
+            String query;
+            query = "SELECT * FROM usuarios where contrasenia = '" + contraseniaIngresada + "'";
+            ResultSet consulta = clsConectar.conexionBD.createStatement().executeQuery(query);
+
+            if (consulta.next()) {
+                System.out.println(consulta.getString(2));
+            }
+
+            clsConectar.cerrarConexion();
+            retorno = 1;
+        } else {
+            retorno = 0;
+        }
+
+        System.out.println("modelo.Usuario.iniciarSesion()" + retorno);
         return retorno;
     }
 

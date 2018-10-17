@@ -14,15 +14,16 @@
     </head>
     <body>
         <div class="container-fluid">
-            <form class="offset-4 col-4">
+            <form action="sr_usuario" method="post" class="offset-4 col-4">
+                <input type="hidden" name="pantalla" value="login">
                 <h3 class="text-center">Acceso de usuario</h3>
                 <div class="form-group">
                     <label for="usuario">Usuario</label>
-                    <input type="text" class="form-control" id="usuario" placeholder="Nombre de usuario">
+                    <input type="text" class="form-control" name="txt_usuario" placeholder="Nombre de usuario">
                 </div>
                 <div class="form-group">
                     <label for="contrasenia">Contrase&ntilde;a</label>
-                    <input type="password" class="form-control" id="contrasenia" placeholder="Contrase&ntilde;a">
+                    <input type="password" class="form-control" name="txt_contrasenia" placeholder="Contrase&ntilde;a">
                 </div>
                 <a href="usuarios/usuarios.jsp">Registrarse</a>
                 <button type="submit" class="btn btn-primary">Ingresar</button>
