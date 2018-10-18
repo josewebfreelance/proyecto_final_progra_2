@@ -38,20 +38,20 @@ public class sr_usuario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
+
             Usuario clsUsuario = new Usuario();
             clsUsuario.setUsuario(request.getParameter("txt_usuario"));
             clsUsuario.setContrasenia(request.getParameter("txt_contrasenia"));
-            
+
             elegirPantalla(request.getParameter("pantalla"), clsUsuario);
             if (clsUsuario.iniciarSesion() > 0) {
                 response.sendRedirect("tablero/tablero.jsp");
             }
-            
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet sr_usuario</title>");            
+            out.println("<title>Servlet sr_usuario</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet sr_usuario at " + request.getContextPath() + "</h1>");
@@ -61,15 +61,13 @@ public class sr_usuario extends HttpServlet {
             Logger.getLogger(sr_usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void elegirPantalla(String pantalla, Usuario entidad) throws NoSuchAlgorithmException, SQLException {
-        switch (pantalla) {
-            case "login" :
-                entidad.iniciarSesion();
-                break;
-            case "registrar" :
-                entidad.registrar();
-                break;
+        if (pantalla == "login") {
+            entidad.iniciarSesion();
+        }
+        if (pantalla == "registrar") {
+            entidad.registrar();
         }
     }
 

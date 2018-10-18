@@ -82,7 +82,7 @@ public class Usuario {
             ResultSet consulta = clsConectar.conexionBD.createStatement().executeQuery(query);
 
             if (consulta.next()) {
-                System.out.println(consulta.getString(2));
+                System.out.println("usuario:" + consulta.getString(2));
             }
 
             clsConectar.cerrarConexion();
@@ -91,7 +91,6 @@ public class Usuario {
             retorno = 0;
         }
 
-        System.out.println("modelo.Usuario.iniciarSesion()" + retorno);
         return retorno;
     }
 
