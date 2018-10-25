@@ -14,10 +14,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Pagina Puestos</title>
-                        <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css"/>
-                        <link rel="stylesheet" href="../assets/boostrap/css/bootstrap-theme.css"/>
-                        <script src="./boostrap/js/jquery-3.2.1.min.js" ></script>
-                        <script src="./boostrap/js/bootstrap.js" ></script>
+        <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap-theme.min.css">
+        <script src="../assets/js/jquery-3.3.1.slim.min.js"></script>
+        <script src="../assets/js/bootstrap.js"></script>
                         
     <body>
         <header>
@@ -63,7 +63,7 @@
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal_puesto">Nuevo</button>
         <button type="button" class="btn btn-info btn-lg" id="btnReg" onclick="opener.top.location.reload();window.close()" name="btnReg" data-toggle="modal"  >Regresar</button>
     <!-- Modal -->
-<div id="modal_puesto" class="modal fade" role="dialog">
+<div id="modal_puesto" class="modal fade" role="modal">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">

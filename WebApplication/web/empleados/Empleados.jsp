@@ -14,10 +14,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Pagina Empleados</title>
-                        <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css"/>
-                        <link rel="stylesheet" href="../assets/boostrap/css/bootstrap-theme.css"/>
-                        <script src="../assets/js/bootstrap.js" ></script>
-                        <script src="../assets/js/jquery-3.3.1.slim.min.js" ></script>
+        <link rel="stylesheet" href="../assets/bootstrap/Bootstrap v3.3.7/css/bootstrap.css">
+        <link rel="stylesheet" href="../assets/bootstrap/Bootstrap v3.3.7/css/bootstrap-theme.min.css">
+        <script src="../assets/js/jquery-3.3.1.slim.min.js"></script>
+        <script src="../assets/js/bootstrap.js"></script>
                         
     </head>
     <body>
@@ -63,8 +63,10 @@
     </header>
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal_empleado">Nuevo</button>
     <!-- Modal -->
+    
+    
 <div id="modal_empleado" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog dialog-md">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
