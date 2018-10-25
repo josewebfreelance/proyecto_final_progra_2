@@ -16,7 +16,7 @@ public class Conexion {
     private final String sgdb="mysql";
     private final String servidor="localhost";
     private final String puerto =":3306";
-    private final String bd="dbescuela";
+    private final String bd="db_empresa";
     private final String urlConexion = "jdbc:"+sgdb +"://"+servidor+puerto+"/"+bd; 
     private final String usuario ="root";
     private final String contra ="";
