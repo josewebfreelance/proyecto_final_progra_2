@@ -42,31 +42,31 @@ public class Servlet_puesto extends HttpServlet {
             
             if (request.getParameter("btnAgregar1") !=null){
                  if (clsPuestos1.ingresarpuesto()>0){
-                response.sendRedirect("Puestos_.jsp");
+                response.sendRedirect("/proyecto_empresa/puestos/Puestos_.jsp");
                  }
             else{
                 out.println("<h1>Error...</h1>");
-                out.println("<a href='Puestos_.jsp'></a>");
+                out.println("<a href='/proyecto_empresa/puestos/Puestos_.jsp'></a>");
                 }
             }
             
            if (request.getParameter("btnModificar1") !=null){
                  if (clsPuestos1.Modificarpuesto()>0){
-                response.sendRedirect("Puestos_.jsp");
+                response.sendRedirect("/proyecto_empresa/puestos/Puestos_.jsp");
                  }
             else{
                 out.println("<h1>Error...</h1>");
-                out.println("<a href='Puestos_.jsp'></a>");
+                out.println("<a href='/proyecto_empresa/puestos/Puestos_.jsp'></a>");
                 }
             }
            
            if (request.getParameter("btnEliminar1") !=null){
                  if (clsPuestos1.Eliminarpuestos()>0){
-                response.sendRedirect("Puestos_.jsp");
+                response.sendRedirect("/proyecto_empresa/puestos/Puestos_.jsp");
                  }
             else{
                 out.println("<h1>Error...</h1>");
-                out.println("<a href='Puestos_.jsp'></a>");
+                out.println("<a href='proyecto_empresa/puestos/Puestos_.jsp'></a>");
                 }
             }
            

@@ -10,11 +10,11 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_empl</servlet-name>
-        <url-pattern>/Servlet_empl</url-pattern>
+        <url-pattern>/empleados/Servlet_empl</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Servlet_puesto</servlet-name>
-        <url-pattern>/Servlet_puesto</url-pattern>
+        <url-pattern>/puestos/Servlet_puesto</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

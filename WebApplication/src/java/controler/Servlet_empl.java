@@ -48,30 +48,30 @@ public class Servlet_empl extends HttpServlet {
             if (request.getParameter("btnAgregar") != null)
             {
                 if (clsPuestos1.ingresar()>0){
-                    response.sendRedirect("Empleados.jsp");
+                    response.sendRedirect("/proyecto_empresa/empleados/Empleados.jsp");
                 }
             else{
                     out.println("<h1>Error...</h1>");
-                    out.println("<a href='Empleados.jsp'></a>");
+                    out.println("<a href='/proyecto_empresa/empleados/Empleados.jsp'></a>");
                 }
             }
             if (request.getParameter("btnModificar") !=null)
             {
                 if (clsPuestos1.Modificar() >0){
-                response.sendRedirect("Empleados.jsp");
+                response.sendRedirect("/proyecto_empresa/empleados/Empleados.jsp");
                  }
             else{
                 out.println("<h1>Error...</h1>");
-                out.println("<a href='Empleados.jsp'></a>");
+                out.println("<a href='/proyecto_empresa/empleados/Empleados.jsp'></a>");
                 }
             }
             if (request.getParameter("btnEliminar") !=null){
                  if (clsPuestos1.Eliminar()>0){
-                response.sendRedirect("Empleados.jsp");
+                response.sendRedirect("/proyecto_empresa/empleados/Empleados.jsp");
                  }
             else{
                 out.println("<h1>Error...</h1>");
-                out.println("<a href='Empleados.jsp'></a>");
+                out.println("<a href='proyecto_empresa/empleados/Empleados.jsp'></a>");
                 }
             }
             out.println("</body>");
