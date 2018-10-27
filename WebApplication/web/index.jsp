@@ -10,11 +10,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
-        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css"/>
     </head>
     <body>
         <div class="container-fluid">
-            <form action="sr_usuario" method="post" class="offset-4 col-4">
+            <form action="sr_usuario" method="post" class="col-lg-offset-4 col-lg-4">
                 <input type="hidden" name="pantalla" value="login">
                 <h3 class="text-center">Acceso de usuario</h3>
                 <div class="form-group">
@@ -25,8 +25,10 @@
                     <label for="contrasenia">Contrase&ntilde;a</label>
                     <input type="password" class="form-control" name="txt_contrasenia" placeholder="Contrase&ntilde;a">
                 </div>
-                <a href="usuarios/usuarios.jsp">Registrarse</a>
-                <button type="submit" class="btn btn-primary">Ingresar</button>
+                <div class="col-lg-12 text-right">
+                    <a href="usuarios/usuarios.jsp">Registrarse</a>
+                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                </div>
             </form>
         </div>
     </body>

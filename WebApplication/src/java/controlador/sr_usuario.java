@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Usuario;
 
 /**
@@ -44,7 +45,12 @@ public class sr_usuario extends HttpServlet {
 
             elegirPantalla(request.getParameter("pantalla"), clsUsuario);
             if (clsUsuario.iniciarSesion() > 0) {
+                HttpSession sesion = request.getSession(true);
+                sesion.setAttribute("usr", clsUsuario);
+
                 response.sendRedirect("tablero/tablero.jsp");
+            } else {
+                response.sendRedirect("index.jsp");
             }
 
             out.println("<!DOCTYPE html>");
