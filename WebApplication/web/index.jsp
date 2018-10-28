@@ -19,11 +19,11 @@
                 <h3 class="text-center">Acceso de usuario</h3>
                 <div class="form-group">
                     <label for="usuario">Usuario</label>
-                    <input type="text" class="form-control" name="txt_usuario" placeholder="Nombre de usuario">
+                    <input type="text" class="form-control" name="txt_usuario" placeholder="Nombre de usuario" required>
                 </div>
                 <div class="form-group">
                     <label for="contrasenia">Contrase&ntilde;a</label>
-                    <input type="password" class="form-control" name="txt_contrasenia" placeholder="Contrase&ntilde;a">
+                    <input type="password" class="form-control" name="txt_contrasenia" placeholder="Contrase&ntilde;a" required>
                 </div>
                 <div class="col-lg-12 text-right">
                     <a href="usuarios/usuarios.jsp">Registrarse</a>

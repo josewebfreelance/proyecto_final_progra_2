@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,15 +33,10 @@ public class sr_tablero extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet sr_tablero</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet sr_tablero at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            HttpSession sesion = request.getSession(false);
+            sesion.setAttribute("usr", "");
+            
+            response.sendRedirect("/proyecto_final_progra_2/index.jsp");
         }
     }
 

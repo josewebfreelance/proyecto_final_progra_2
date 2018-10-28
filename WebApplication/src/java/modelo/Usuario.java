@@ -71,24 +71,24 @@ public class Usuario {
     }
 
     public int iniciarSesion() throws NoSuchAlgorithmException, SQLException {
-        int retorno;
+        int retorno = 0;
         String contraseniaIngresada = sha256(getContrasenia());
 
-        if (getUsuario() != "" && getContrasenia() != "") {
+        if (getContrasenia().equals("") || getUsuario().equals("")) {
+            retorno = 0;
+        } else {
             clsConectar = new Conexion();
             clsConectar.abrirConexion();
             String query;
-            query = "SELECT * FROM usuarios where contrasenia = '" + contraseniaIngresada + "'";
+            query = "SELECT * FROM usuarios where usuario = '" + getUsuario() + "' AND contrasenia = '" + contraseniaIngresada + "'";
             ResultSet consulta = clsConectar.conexionBD.createStatement().executeQuery(query);
 
             if (consulta.next()) {
-                System.out.println("usuario:" + consulta.getString(2));
+                clsConectar.cerrarConexion();
+                retorno = 1;
+            } else {
+                retorno = 0;
             }
-
-            clsConectar.cerrarConexion();
-            retorno = 1;
-        } else {
-            retorno = 0;
         }
 
         return retorno;

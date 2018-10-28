@@ -39,17 +39,17 @@ public class sr_usuario extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 
+            HttpSession sesion = request.getSession(true);
             Usuario clsUsuario = new Usuario();
             clsUsuario.setUsuario(request.getParameter("txt_usuario"));
             clsUsuario.setContrasenia(request.getParameter("txt_contrasenia"));
 
             elegirPantalla(request.getParameter("pantalla"), clsUsuario);
             if (clsUsuario.iniciarSesion() > 0) {
-                HttpSession sesion = request.getSession(true);
-                sesion.setAttribute("usr", clsUsuario);
-
+                sesion.setAttribute("usr", request.getParameter("txt_usuario"));
                 response.sendRedirect("tablero/tablero.jsp");
             } else {
+                sesion.invalidate();
                 response.sendRedirect("index.jsp");
             }
 

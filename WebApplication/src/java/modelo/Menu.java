@@ -22,7 +22,7 @@ public class Menu {
     PreparedStatement parametro;
 
     private int id, padre;
-    private String menu;
+    private String menu, url;
 
     public int getId() {
         return id;
@@ -48,11 +48,20 @@ public class Menu {
         this.menu = menu;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public List<List<String>> obtenerMenu() {
         List<List<String>> lista = new ArrayList<List<String>>();
         lista.add(new ArrayList<String>());
         lista.add(new ArrayList<String>());
-        lista.add(new ArrayList<String>());        
+        lista.add(new ArrayList<String>());
+        lista.add(new ArrayList<String>());
         try {
             clsConectar = new Conexion();
             clsConectar.abrirConexion();
@@ -65,6 +74,7 @@ public class Menu {
                 lista.get(0).add(consulta.getString("idmenu"));
                 lista.get(1).add(consulta.getString("padre"));
                 lista.get(2).add(consulta.getString("menu"));
+                lista.get(3).add(consulta.getString("url"));                
             }
             clsConectar.cerrarConexion();
 
