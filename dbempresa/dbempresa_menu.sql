@@ -18,28 +18,29 @@ USE `dbempresa`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `usuarios`
+-- Table structure for table `menu`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
+DROP TABLE IF EXISTS `menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuarios` (
-  `idusuarios` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario` varchar(45) NOT NULL,
-  `contrasenia` varchar(100) NOT NULL,
-  PRIMARY KEY (`idusuarios`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+CREATE TABLE `menu` (
+  `idmenu` int(11) NOT NULL AUTO_INCREMENT,
+  `padre` int(5) NOT NULL,
+  `menu` varchar(45) NOT NULL,
+  `url` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`idmenu`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuarios`
+-- Dumping data for table `menu`
 --
 
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'jlemus','a065f30b3c2c4778f6be0e799b84e940b042d4c340340a032192223769847178'),(2,'jlemus','a065f30b3c2c4778f6be0e799b84e940b042d4c340340a032192223769847178'),(3,'Miguel','5ef68465886fa04d3e0bbe86b59d964dd98e5775e95717df978d8bedee6ff16c'),(4,'','e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+LOCK TABLES `menu` WRITE;
+/*!40000 ALTER TABLE `menu` DISABLE KEYS */;
+INSERT INTO `menu` VALUES (1,0,'Producto',NULL),(2,1,'Marcas',NULL),(3,0,'Ventas',NULL),(4,3,'Clientes',NULL),(5,3,'Empleados',NULL),(6,5,'Puestos',NULL),(7,0,'Compras',NULL),(8,7,'Proveedores',NULL);
+/*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-28 17:02:56
+-- Dump completed on 2018-10-28 17:02:55

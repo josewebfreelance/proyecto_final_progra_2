@@ -5,7 +5,7 @@
 --%>
 <%
     if (session.getAttribute("usr").equals("")) {
-        response.sendRedirect("/proyecto_final_progra_2/index.jsp");
+        response.sendRedirect("/proyecto_final_progra_2/");
     }
 %>
 <%@page import="java.util.List"%>
