@@ -3,9 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+// Menus obtenidos
+let menus = [];
 
 function cerrarSesion() {
-    $(window).replaceAll('location', '/proyecto_final_progra_2/index.jsp');
-    // $(window).attr('location', '/proyecto_final_progra_2/index.jsp');
-    console.log("ok");
+    // $(window).replaceAll('location', '/proyecto_final_progra_2/');
+    $(window).attr('location', '/proyecto_final_progra_2/index.jsp');
+}
+
+function obtenerMenu(id, padre, menu, url) {
+    let obj = {};
+    obj.id = id;
+    obj.padre = padre;
+    obj.menu = menu;
+    obj.url = url;
+    menus.push(obj);
+}
+
+function activarMenu(seleccionado, comparar) {
+    const el = $(`#${seleccionado}`);
+    if (seleccionado === comparar) {
+        el.addClass('active');
+    }
 }

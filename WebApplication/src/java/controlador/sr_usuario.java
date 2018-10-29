@@ -47,7 +47,7 @@ public class sr_usuario extends HttpServlet {
             elegirPantalla(request.getParameter("pantalla"), clsUsuario);
             if (clsUsuario.iniciarSesion() > 0) {
                 sesion.setAttribute("usr", request.getParameter("txt_usuario"));
-                response.sendRedirect("tablero/tablero.jsp");
+                response.sendRedirect("tablero/tablero.jsp?seleccionado=0");
             } else {
                 sesion.invalidate();
                 response.sendRedirect("index.jsp");

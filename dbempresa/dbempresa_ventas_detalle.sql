@@ -18,28 +18,33 @@ USE `dbempresa`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `usuarios`
+-- Table structure for table `ventas_detalle`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
+DROP TABLE IF EXISTS `ventas_detalle`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuarios` (
-  `idusuarios` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario` varchar(45) NOT NULL,
-  `contrasenia` varchar(100) NOT NULL,
-  PRIMARY KEY (`idusuarios`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+CREATE TABLE `ventas_detalle` (
+  `idventa_detalle` bigint(20) NOT NULL AUTO_INCREMENT,
+  `idVenta` int(11) DEFAULT NULL,
+  `idProducto` int(11) DEFAULT NULL,
+  `cantidad` varchar(45) DEFAULT NULL,
+  `precio_unitario` decimal(8,2) DEFAULT NULL,
+  PRIMARY KEY (`idventa_detalle`),
+  KEY `idVenta_idx` (`idVenta`),
+  KEY `idProducto_idx` (`idProducto`),
+  CONSTRAINT `idProducto` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `idVenta` FOREIGN KEY (`idVenta`) REFERENCES `ventas` (`idVenta`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuarios`
+-- Dumping data for table `ventas_detalle`
 --
 
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'jlemus','a065f30b3c2c4778f6be0e799b84e940b042d4c340340a032192223769847178'),(2,'jlemus','a065f30b3c2c4778f6be0e799b84e940b042d4c340340a032192223769847178'),(3,'Miguel','5ef68465886fa04d3e0bbe86b59d964dd98e5775e95717df978d8bedee6ff16c'),(4,'','e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+LOCK TABLES `ventas_detalle` WRITE;
+/*!40000 ALTER TABLE `ventas_detalle` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ventas_detalle` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-29  4:29:32
+-- Dump completed on 2018-10-29  4:29:29

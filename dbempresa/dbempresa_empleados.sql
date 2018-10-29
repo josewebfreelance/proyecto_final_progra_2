@@ -18,28 +18,37 @@ USE `dbempresa`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `usuarios`
+-- Table structure for table `empleados`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
+DROP TABLE IF EXISTS `empleados`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuarios` (
-  `idusuarios` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario` varchar(45) NOT NULL,
-  `contrasenia` varchar(100) NOT NULL,
-  PRIMARY KEY (`idusuarios`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+CREATE TABLE `empleados` (
+  `idEmpleado` int(11) NOT NULL AUTO_INCREMENT,
+  `nombres` varchar(60) DEFAULT NULL,
+  `apellidos` varchar(60) DEFAULT NULL,
+  `direccion` varchar(80) DEFAULT NULL,
+  `telefono` varchar(25) DEFAULT NULL,
+  `DPI` varchar(15) DEFAULT NULL,
+  `genero` bit(1) DEFAULT NULL,
+  `fecha_nacimiento` date DEFAULT NULL,
+  `idPuesto` smallint(6) DEFAULT NULL,
+  `fecha_inicio_labores` date DEFAULT NULL,
+  `fechaingreso` datetime DEFAULT NULL,
+  PRIMARY KEY (`idEmpleado`),
+  KEY `idPuesto_idx` (`idPuesto`),
+  CONSTRAINT `idPuesto` FOREIGN KEY (`idPuesto`) REFERENCES `puestos` (`idPuesto`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuarios`
+-- Dumping data for table `empleados`
 --
 
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'jlemus','a065f30b3c2c4778f6be0e799b84e940b042d4c340340a032192223769847178'),(2,'jlemus','a065f30b3c2c4778f6be0e799b84e940b042d4c340340a032192223769847178'),(3,'Miguel','5ef68465886fa04d3e0bbe86b59d964dd98e5775e95717df978d8bedee6ff16c'),(4,'','e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+LOCK TABLES `empleados` WRITE;
+/*!40000 ALTER TABLE `empleados` DISABLE KEYS */;
+/*!40000 ALTER TABLE `empleados` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-29  4:29:32
+-- Dump completed on 2018-10-29  4:29:31

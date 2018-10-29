@@ -3,7 +3,7 @@
     Created on : 14/10/2018, 12:47:58 AM
     Author     : jlemus
 --%>
-
+<% session.setAttribute("usr", ""); %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

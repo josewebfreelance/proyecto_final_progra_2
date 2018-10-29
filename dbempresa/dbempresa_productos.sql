@@ -18,28 +18,35 @@ USE `dbempresa`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `usuarios`
+-- Table structure for table `productos`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
+DROP TABLE IF EXISTS `productos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuarios` (
-  `idusuarios` int(11) NOT NULL AUTO_INCREMENT,
-  `usuario` varchar(45) NOT NULL,
-  `contrasenia` varchar(100) NOT NULL,
-  PRIMARY KEY (`idusuarios`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+CREATE TABLE `productos` (
+  `idProducto` int(11) NOT NULL AUTO_INCREMENT,
+  `producto` varchar(50) DEFAULT NULL,
+  `idMarca` smallint(6) DEFAULT NULL,
+  `Descripcion` varchar(100) DEFAULT NULL,
+  `Imagen` varchar(30) DEFAULT NULL,
+  `precio_costo` decimal(8,2) DEFAULT NULL,
+  `precio_venta` decimal(8,2) DEFAULT NULL,
+  `existencia` int(11) DEFAULT NULL,
+  `fecha_ingreso` datetime DEFAULT NULL,
+  PRIMARY KEY (`idProducto`),
+  KEY `idMarca_idx` (`idMarca`),
+  CONSTRAINT `idMarca` FOREIGN KEY (`idMarca`) REFERENCES `marcas` (`idmarca`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuarios`
+-- Dumping data for table `productos`
 --
 
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'jlemus','a065f30b3c2c4778f6be0e799b84e940b042d4c340340a032192223769847178'),(2,'jlemus','a065f30b3c2c4778f6be0e799b84e940b042d4c340340a032192223769847178'),(3,'Miguel','5ef68465886fa04d3e0bbe86b59d964dd98e5775e95717df978d8bedee6ff16c'),(4,'','e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+LOCK TABLES `productos` WRITE;
+/*!40000 ALTER TABLE `productos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

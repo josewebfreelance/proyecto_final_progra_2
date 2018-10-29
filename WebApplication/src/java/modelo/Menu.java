@@ -66,11 +66,10 @@ public class Menu {
             clsConectar = new Conexion();
             clsConectar.abrirConexion();
             String query;
-            query = "Select * from menu";
+            query = "SELECT * FROM menu";
             ResultSet consulta = clsConectar.conexionBD.createStatement().executeQuery(query);
 
             while (consulta.next()) {
-
                 lista.get(0).add(consulta.getString("idmenu"));
                 lista.get(1).add(consulta.getString("padre"));
                 lista.get(2).add(consulta.getString("menu"));

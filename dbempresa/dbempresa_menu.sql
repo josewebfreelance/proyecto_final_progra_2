@@ -39,7 +39,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (1,0,'Producto',NULL),(2,1,'Marcas',NULL),(3,0,'Ventas',NULL),(4,3,'Clientes',NULL),(5,3,'Empleados',NULL),(6,5,'Puestos',NULL),(7,0,'Compras',NULL),(8,7,'Proveedores',NULL);
+INSERT INTO `menu` VALUES (1,0,'Producto',NULL),(2,1,'Marcas',NULL),(3,0,'Ventas','ventas/ventas'),(4,3,'Clientes',NULL),(5,3,'Empleados',NULL),(6,5,'Puestos',NULL),(7,0,'Compras',NULL),(8,7,'Proveedores',NULL);
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-28 17:02:55
+-- Dump completed on 2018-10-29  4:29:29
