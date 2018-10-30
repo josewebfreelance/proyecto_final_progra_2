@@ -16,7 +16,8 @@
         <title>Pagina Empleados</title>
         <link rel="stylesheet" href="../assets/bootstrap/Bootstrap v3.3.7/css/bootstrap.css">
         <link rel="stylesheet" href="../assets/bootstrap/Bootstrap v3.3.7/css/bootstrap-theme.min.css">
-        <script src="../assets/js/jquery-3.3.1.slim.min.js"></script>
+        
+        <script src="../assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
         <script src="../assets/js/bootstrap.js"></script>
                         
     </head>
@@ -82,7 +83,13 @@
                         <input type="text" class="form-control" id="txtDireccion" name="txtDireccion" value="" placeholder="Direccion" required>
                         <input type="number" class="form-control" id="txtTelefono" name="txtTelefono" value="" placeholder="Telefono">
                         <input type="text" class="form-control" id="txtDpi" name="txtDpi" value="" placeholder="DPI" required>
-                        <select id="dropPuesto" name="dropPuesto" class="form-control"  >
+                        <p>Genéro</p>
+                        <input type="radio" id="rBGenero" name="rBGenero" value="0" checked> Masculino<br>
+                        <input type="radio" id="rBGenero" name="rBGenero" value="1"> Femenino<br>
+                        </p>
+                        <p>Fecha Nacimiento:</p>
+                        <input type="date" class="form-control"  id="txtFNacimiento" name="txtFNacimiento" value="" placeholder="Fecha Nacimiento" required></p>
+                        <select id="droppuesto" name="droppuesto" class="form-control"  >
                             
                         <%
                             Puestos clsPuestos  = new Puestos();
@@ -93,7 +100,7 @@
                             }   
                         %>
                         </select>
-                        <input type="date" class="form-control"  id="txtFNacimiento" name="txtFNacimiento" value="" placeholder="Feha Nacimiento" required>
+                        <input type="date" class="form-control"  id="txtFILab" name="txtFILab" value="" placeholder="Inicio Labores" required>
                         <input type="submit" id="btnAgregar" name="btnAgregar" value="Agregar" class="btn btn-info btn-lg" >
                         <input type="submit" id="btnModificar" name="btnModificar" value="Modificar" class="btn btn-primary  btn-lg" >
                         <input type="submit" id="btnEliminar" name ="btnEliminar" value="Eliminar" onclick="javascript:if(!confirm('¿Desea Eliminar?'))return false" class="btn btn-danger btn-lg" >
@@ -120,8 +127,10 @@
                                 <th>Direccion</th>
                                 <th>Telefono</th>
                                 <th>DPI</th>
-                                <th>Puesto</th>
+                                <th>Genero</th>
                                 <th>FechaNacimiento</th>
+                                <th>Puesto</th>
+                                <th>Fecha Inicio Labores</th>
                                 <th>Fecha Ingreso</th>
                             </thead>
                             <tbody id="tbl_empleado">
@@ -130,7 +139,7 @@
                                 DefaultTableModel tblModelo1= new DefaultTableModel();
                                tblModelo1 =clsPuestos.llenarEmpleado();
                                           for(int a=0;a< tblModelo1.getRowCount();a++){
-                                out.println("<tr data-id="+ tblModelo1.getValueAt(a,0).toString()  +" data-idpuestos="+ tblModelo1.getValueAt(a,8).toString()  +" >");
+                                out.println("<tr data-id="+ tblModelo1.getValueAt(a,0).toString()  +" data-idpu="+ tblModelo1.getValueAt(a,11).toString()  +" >");
                                 out.println("<td>" + tblModelo1.getValueAt(a,1).toString()  + "</td>");
                                 out.println("<td>" + tblModelo1.getValueAt(a,2).toString()  + "</td>");
                                 out.println("<td>" + tblModelo1.getValueAt(a,3).toString()  + "</td>");
@@ -139,6 +148,8 @@
                                 out.println("<td>" + tblModelo1.getValueAt(a,6).toString()  + "</td>");
                                 out.println("<td>" + tblModelo1.getValueAt(a,7).toString()  + "</td>");
                                 out.println("<td>" + tblModelo1.getValueAt(a,8).toString()  + "</td>");
+                                out.println("<td>" + tblModelo1.getValueAt(a,9).toString()  + "</td>");
+                                out.println("<td>" + tblModelo1.getValueAt(a,10).toString()  + "</td>");
                                 out.println("</tr>");
                                           }
        
@@ -150,19 +161,21 @@
          </div>
    <script type="text/javascript">   
 $('#tbl_empleado').on('click','tr td', function(evt){
-   var target,idEmpleados,idTipopuesto,Nombres,Apellidos,Direccion,Telefono,DPI,Puesto,FechaNacimiento;
+   var target,idEmpleados,idts,Nombres,Apellidos,Direccion,Telefono,DPI,Genero,FechaNacimiento,Puesto,Inicio_lab;
  
    
    target = $(event.target);
    idEmpleados = target.parent().data('id');
-   idTipopuesto= target.parent().data('idpuestos');
+   idts= target.parent().data('idpu');
    Nombres= target.parents("tr").find("td").eq(0).html();
    Apellidos= target.parents("tr").find("td").eq(1).html();
    Direccion= target.parents("tr").find("td").eq(2).html();
    Telefono= target.parents("tr").find("td").eq(3).html();
    DPI= target.parents("tr").find("td").eq(4).html();
-   Puesto= target.parents("tr").find("td").eq(5).html();
+   Genero= target.parents("tr").find("td").eq(5).html();
    FechaNacimiento= target.parents("tr").find("td").eq(6).html();
+   Puesto= target.parents("tr").find("td").eq(7).html();
+   Inicio_lab= target.parents("tr").find("td").eq(8).html();
    
    $("#txtId").val(idEmpleados);
    $("#txtNombres").val(Nombres);
@@ -170,8 +183,10 @@ $('#tbl_empleado').on('click','tr td', function(evt){
    $("#txtDireccion").val(Direccion);
    $("#txtTelefono").val(Telefono);
    $("#txtDpi").val(DPI);
-   $("#dropPuesto").attr("value",Puesto);
+   $("#rBGenero").val(Genero);
    $("#txtFNacimiento").attr("value",FechaNacimiento);
+   $("#droppuesto").val(idts);
+   $("#txtFILab").val(Inicio_lab);
    $('#modal_empleado').modal('show');
 });
 

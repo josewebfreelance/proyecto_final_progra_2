@@ -33,9 +33,11 @@ public class Servlet_empl extends HttpServlet {
             clsPuestos1.setDireccion(request.getParameter("txtDireccion"));
             clsPuestos1.setTelefono(request.getParameter("txtTelefono"));
             clsPuestos1.setDpi(request.getParameter("txtDpi"));
-            clsPuestos1.setTipopuesto(Integer.parseInt(request.getParameter("dropPuesto")));
+            clsPuestos1.setGenero(request.getParameter("rBGenero"));
             clsPuestos1.setFechaNacimiento(request.getParameter("txtFNacimiento"));
-
+            clsPuestos1.setTipopuesto(Integer.parseInt(request.getParameter("droppuesto")));
+            clsPuestos1.setFecha_inicioLab(request.getParameter("txtFILab"));
+            
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");

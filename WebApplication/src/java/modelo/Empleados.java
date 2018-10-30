@@ -11,8 +11,24 @@ package modelo;
  */
 public class Empleados {
     public String nombre,apellido,direccion,telefono,dpi;
-   public String fechaNacimiento,puesto, puestoID,puestoTipo;
+   public String fechaNacimiento,puesto, puestoID,puestoTipo,fecha_inicioLab,genero;
    public int idpuesto, tipopuesto, idEmpleados;
+
+    public String getFecha_inicioLab() {
+        return fecha_inicioLab;
+    }
+
+    public void setFecha_inicioLab(String fecha_inicioLab) {
+        this.fecha_inicioLab = fecha_inicioLab;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
 
    
 public void setNombre(String prNombre){nombre=prNombre;}
