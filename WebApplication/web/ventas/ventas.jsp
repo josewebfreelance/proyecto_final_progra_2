@@ -3,6 +3,8 @@
     Created on : 28/10/2018, 10:42:45 PM
     Author     : jlemus
 --%>
+<%@page import="modelo.Ventas"%>
+<%@page import="javax.swing.table.DefaultTableModel"%>
 <%
     if (session.getAttribute("usr").equals("")) {
         response.sendRedirect("/proyecto_final_progra_2/");
@@ -33,7 +35,22 @@
                             <th>Fecha ingreso</th>
                             </thead>
                             <tbody id="tbl_estudiante">
-                                <tr><td>1</td></tr>
+                                <%  
+                                    Ventas clsVentas  = new Ventas();
+                                    DefaultTableModel tblModelo = new DefaultTableModel();
+                                    tblModelo = clsVentas.llenarTabla();
+                                    for (int a = 0; a < tblModelo.getRowCount(); a++) {
+                                        out.println("<tr data-idestudiante=" + tblModelo.getValueAt(a, 0).toString() + " data-idts=" + tblModelo.getValueAt(a, 0).toString() + " >");
+                                        out.println("<td>" + tblModelo.getValueAt(a, 1).toString() + "</td>");
+                                        out.println("<td>" + tblModelo.getValueAt(a, 2).toString() + "</td>");
+                                        out.println("<td>" + tblModelo.getValueAt(a, 3).toString() + "</td>");
+                                        out.println("<td>" + tblModelo.getValueAt(a, 4).toString() + "</td>");
+                                        out.println("<td>" + tblModelo.getValueAt(a, 5).toString() + "</td>");
+                                        out.println("<td>" + tblModelo.getValueAt(a, 6).toString() + "</td>");
+                                        out.println("</tr>");
+                                    }
+
+                                %>
                             </tbody>
                         </table>
                     </div>                
