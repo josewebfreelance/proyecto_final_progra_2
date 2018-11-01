@@ -84,11 +84,12 @@
                         <input type="number" class="form-control" id="txtTelefono" name="txtTelefono" value="" placeholder="Telefono">
                         <input type="text" class="form-control" id="txtDpi" name="txtDpi" value="" placeholder="DPI" required>
                         <p>Genéro</p>
-                        <input type="radio" id="rBGenero" name="rBGenero" value="0" checked> Masculino<br>
-                        <input type="radio" id="rBGenero" name="rBGenero" value="1"> Femenino<br>
+                        <input type="radio" id="rBGenero" name="rBGenero" value="0"> Masculino<br>
+                        <input type="radio" id="rBGenero" name="rBGenero" value="1" > Femenino<br>
                         </p>
                         <p>Fecha Nacimiento:</p>
                         <input type="date" class="form-control"  id="txtFNacimiento" name="txtFNacimiento" value="" placeholder="Fecha Nacimiento" required></p>
+                        <p>Puesto</p>
                         <select id="droppuesto" name="droppuesto" class="form-control"  >
                             
                         <%
@@ -99,7 +100,8 @@
                                out.println("<option value='" +lista.get(0).get(i) +"'>" +lista.get(1).get(i) +"</option>");
                             }   
                         %>
-                        </select>
+                        </select></p>
+                        <p>Inicio de Labores:</p>
                         <input type="date" class="form-control"  id="txtFILab" name="txtFILab" value="" placeholder="Inicio Labores" required>
                         <input type="submit" id="btnAgregar" name="btnAgregar" value="Agregar" class="btn btn-info btn-lg" >
                         <input type="submit" id="btnModificar" name="btnModificar" value="Modificar" class="btn btn-primary  btn-lg" >
@@ -119,7 +121,7 @@
 
   </div>
 </div> 
-       <div class="table-responsive">
+              <div class="table-responsive">
     <table class="table table-hover table-bordered">
                             <thead>
                                 <th>Nombres</th>
@@ -129,17 +131,17 @@
                                 <th>DPI</th>
                                 <th>Genero</th>
                                 <th>FechaNacimiento</th>
-                                <th>Puesto</th>
+                                <th>Id P.</th>
                                 <th>Fecha Inicio Labores</th>
                                 <th>Fecha Ingreso</th>
+                                <th>Puesto</th>
                             </thead>
                             <tbody id="tbl_empleado">
                             <% 
-                                //Estudiante clsEstudiante2  = new Estudiante();
                                 DefaultTableModel tblModelo1= new DefaultTableModel();
                                tblModelo1 =clsPuestos.llenarEmpleado();
                                           for(int a=0;a< tblModelo1.getRowCount();a++){
-                                out.println("<tr data-id="+ tblModelo1.getValueAt(a,0).toString()  +" data-idpu="+ tblModelo1.getValueAt(a,11).toString()  +" >");
+                                out.println("<tr data-id="+ tblModelo1.getValueAt(a,0).toString()  +" data-idpu="+ tblModelo1.getValueAt(a,9).toString()  +" >");
                                 out.println("<td>" + tblModelo1.getValueAt(a,1).toString()  + "</td>");
                                 out.println("<td>" + tblModelo1.getValueAt(a,2).toString()  + "</td>");
                                 out.println("<td>" + tblModelo1.getValueAt(a,3).toString()  + "</td>");
@@ -150,6 +152,7 @@
                                 out.println("<td>" + tblModelo1.getValueAt(a,8).toString()  + "</td>");
                                 out.println("<td>" + tblModelo1.getValueAt(a,9).toString()  + "</td>");
                                 out.println("<td>" + tblModelo1.getValueAt(a,10).toString()  + "</td>");
+                                out.println("<td>" + tblModelo1.getValueAt(a,11).toString()  + "</td>");
                                 out.println("</tr>");
                                           }
        
@@ -185,15 +188,12 @@ $('#tbl_empleado').on('click','tr td', function(evt){
    $("#txtDpi").val(DPI);
    $("#rBGenero").val(Genero);
    $("#txtFNacimiento").attr("value",FechaNacimiento);
-   $("#droppuesto").val(idts);
+   $("#droppuesto").val(Puesto);
    $("#txtFILab").val(Inicio_lab);
    $('#modal_empleado').modal('show');
 });
 
-</script>
-
-
-                
+</script>        
     </body>
     <footer>
         <nav class="navbar navbar-inverse">

@@ -118,17 +118,17 @@ PreparedStatement parametro;
 "  empleados.DPI,\n" +
 "  empleados.genero,\n" +
 "  empleados.fecha_nacimiento,\n" +
-"  empleados.idPuesto,\n" +
+"  puestos.puesto as Puesto,\n" +
 "  empleados.fecha_inicio_labores ,\n" +
 "  empleados.fechaingreso ,\n" +
-"  puestos.idPuesto\n" +                  
+"  puestos.idPuesto as idPuesto\n" +                  
 "FROM dbempresa.empleados\n" +
 "  INNER JOIN dbempresa.puestos \n" +
 "		ON empleados.idPuesto = puestos.idPuesto\n" +
 "order by\n" +
 "  empleados.idEmpleado desc";
            ResultSet consulta =  clsConectar.conexionBD.createStatement().executeQuery(query);
-            String encabezado [] = {"idEmpleado","nombres","apellidos","direccion","telefono","DPI","genero","fecha_nacimiento","idPuesto","fecha_inicio_labores","fechaingreso","idPuesto"};
+            String encabezado [] = {"idEmpleado","nombres","apellidos","direccion","telefono","DPI","genero","fecha_nacimiento","Puesto","fecha_inicio_labores","fechaingreso","idPuesto"};
             tblModelo1.setColumnIdentifiers(encabezado);
             String datos[]= new String[12];      
             while (consulta.next())
@@ -144,7 +144,7 @@ PreparedStatement parametro;
                       datos[8] = consulta.getString("idPuesto");
                       datos[9] = consulta.getString("fecha_inicio_labores");
                       datos[10] = consulta.getString("fechaingreso");
-                      datos[11] = consulta.getString("idPuesto");
+                      datos[11] = consulta.getString("Puesto");
                       tblModelo1.addRow(datos);
                     }
               clsConectar.cerrarConexion();
@@ -204,7 +204,7 @@ public int ingresarpuesto(){
            clsConectar = new Conexion();
            clsConectar.AbrirConexion();
            String query;
-           query = "INSERT INTO puestos(Puesto) " +
+           query = "INSERT INTO puestos(puesto) " +
                                             "Values(?)";
                       
            parametro = (PreparedStatement) clsConectar.conexionBD.prepareStatement(query);
@@ -267,8 +267,8 @@ public int ingresarpuesto(){
            clsConectar = new Conexion();
            clsConectar.AbrirConexion();
            String query;
-           query = "update puestos set Puesto = ?" +
-                                            "where idPuestos=?";
+           query = "update puestos set puesto = ?" +
+                                            "where idPuesto=?";
            parametro = (PreparedStatement) clsConectar.conexionBD.prepareStatement(query);
 
            parametro.setString(1, getPuestoTipo());
@@ -322,7 +322,7 @@ public int ingresarpuesto(){
            clsConectar = new Conexion();
            clsConectar.AbrirConexion();
                       String query;
-           query = "DELETE FROM  puestos where idPuestos=?  " ;                                 
+           query = "DELETE FROM  puestos where idPuesto=?  " ;                                 
            parametro = (PreparedStatement) clsConectar.conexionBD.prepareStatement(query);
            parametro.setInt(1, getPuestoID());
            
