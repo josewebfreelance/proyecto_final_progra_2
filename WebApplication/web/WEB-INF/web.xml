@@ -2,11 +2,11 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>Servlet_empl</servlet-name>
-        <servlet-class>controler.Servlet_empl</servlet-class>
+        <servlet-class>controlador.Servlet_empl</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Servlet_puesto</servlet-name>
-        <servlet-class>controler.Servlet_puesto</servlet-class>
+        <servlet-class>controlador.Servlet_puesto</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Servlet_empl</servlet-name>

@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controler;
+package controlador;
 
+import modelo.Puestos;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Puestos;
 
 /**
  *
  * @author Giordy Perez
  */
-public class Servlet_puesto extends HttpServlet {
+public class Servlet_empl extends HttpServlet {
 
    
     protected void accion(HttpServletRequest request, HttpServletResponse response)
@@ -27,9 +27,18 @@ public class Servlet_puesto extends HttpServlet {
         try {
 
             Puestos clsPuestos1 = new Puestos();
-            clsPuestos1.setPuestoTipo(request.getParameter("txtPuesto1"));
-            clsPuestos1.setPuestoID(Integer.parseInt(request.getParameter("txtId1")));
-
+            clsPuestos1.setIdEmpleados(Integer.parseInt(request.getParameter("txtid")));
+            clsPuestos1.setNombre(request.getParameter("txtNombres"));
+            clsPuestos1.setApellido(request.getParameter("txtApellidos"));
+            clsPuestos1.setDireccion(request.getParameter("txtDireccion"));
+            clsPuestos1.setTelefono(request.getParameter("txtTelefono"));
+            clsPuestos1.setDpi(request.getParameter("txtDpi"));
+            clsPuestos1.setGenero(request.getParameter("rBGenero"));
+            clsPuestos1.setFechaNacimiento(request.getParameter("txtFNacimiento"));
+            clsPuestos1.setTipopuesto(Integer.parseInt(request.getParameter("droppuesto")));
+            clsPuestos1.setFecha_inicioLab(request.getParameter("txtFILab"));
+            
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -38,38 +47,35 @@ public class Servlet_puesto extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             
-            
-            
-            if (request.getParameter("btnAgregar1") !=null){
-                 if (clsPuestos1.ingresarpuesto()>0){
-                response.sendRedirect("/proyecto_empresa/puestos/Puestos_.jsp");
+            if (request.getParameter("btnAgregar") != null)
+            {
+                if (clsPuestos1.ingresar()>0){
+                    response.sendRedirect("/proyecto_empresa/empleados/Empleados.jsp");
+                }
+            else{
+                    out.println("<h1>Error...</h1>");
+                    out.println("<a href='/proyecto_empresa/empleados/Empleados.jsp'></a>");
+                }
+            }
+            if (request.getParameter("btnModificar") !=null)
+            {
+                if (clsPuestos1.Modificar() >0){
+                response.sendRedirect("/proyecto_empresa/empleados/Empleados.jsp");
                  }
             else{
                 out.println("<h1>Error...</h1>");
-                out.println("<a href='/proyecto_empresa/puestos/Puestos_.jsp'></a>");
+                out.println("<a href='/proyecto_empresa/empleados/Empleados.jsp'></a>");
                 }
             }
-            
-           if (request.getParameter("btnModificar1") !=null){
-                 if (clsPuestos1.Modificarpuesto()>0){
-                response.sendRedirect("/proyecto_empresa/puestos/Puestos_.jsp");
+            if (request.getParameter("btnEliminar") !=null){
+                 if (clsPuestos1.Eliminar()>0){
+                response.sendRedirect("/proyecto_empresa/empleados/Empleados.jsp");
                  }
             else{
                 out.println("<h1>Error...</h1>");
-                out.println("<a href='/proyecto_empresa/puestos/Puestos_.jsp'></a>");
+                out.println("<a href='proyecto_empresa/empleados/Empleados.jsp'></a>");
                 }
             }
-           
-           if (request.getParameter("btnEliminar1") !=null){
-                 if (clsPuestos1.Eliminarpuestos()>0){
-                response.sendRedirect("/proyecto_empresa/puestos/Puestos_.jsp");
-                 }
-            else{
-                out.println("<h1>Error...</h1>");
-                out.println("<a href='proyecto_empresa/puestos/Puestos_.jsp'></a>");
-                }
-            }
-           
             out.println("</body>");
             out.println("</html>");
         } finally {
