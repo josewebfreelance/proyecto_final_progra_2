@@ -1,6 +1,7 @@
+<%@page import="modelo.Productos"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:directive.page import="modelo.Estudiante"></jsp:directive.page>
+<jsp:directive.page import="modelo.Productos"></jsp:directive.page>
 <jsp:directive.page import="java.util.List"></jsp:directive.page>
 <jsp:directive.page import="java.util.ArrayList"></jsp:directive.page>
 <jsp:directive.page import="javax.swing.table.DefaultTableModel"></jsp:directive.page>
@@ -32,8 +33,8 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Incio</a></li>
-            <li><a href="#">Nosotros</a></li>
-            <li><a href="#contact">Contacto</a></li>
+            <!--<li><a href="#">Nosotros</a></li> 
+            <li><a href="#contact">Contacto</a></li>!-->
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sub Menu <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -46,7 +47,7 @@
                 <li><a href="#">One more separated link</a></li>
               </ul>
             </li>
-          <li><a href="#Exit">Ubicacion</a></li>
+          <!--<li><a href="#Exit">Ubicacion</a></li>!-->
           </ul>
             <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Iniciar</a></li>
@@ -56,38 +57,36 @@
       </div>
     </nav>
     </header>
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal_estudiante">Nuevo</button>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal_productos">Nuevo</button>
     <!-- Modal -->
-<div id="modal_estudiante" class="modal fade" role="dialog">
+<div id="modal_productos" class="modal fade" role="dialog">  <!--ACTION ON CLICK VENTANA EMERGENTE--!>
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h3 class="modal-title">Datos del Estudiante</h3>
+        <h3 class="modal-title">Datos del Producto</h3>
       </div>
       <div class="modal-body">    
-        <form action="EstudianteServlet" class="form-horizontal" method="post" >
+        <form action="ProductosServlet" class="form-horizontal" method="post" >
                 <div class="form-group">
-                    <input type="text" class="form-control"  id="txtid" name="txtid" value="0" placeholder="id" readonly>    
-                    <input type="text" class="form-control"  id="txt_carne" name="txt_carne" placeholder="Carne" pattern="[E,e]{1}[0-9]{3}" required>
-                        <input type="text" class="form-control" id="txt_nombres" name="txt_nombres" placeholder="Nombres" required>
-                        <input type="text" class="form-control" id="txt_apellidos" name="txt_apellidos" value="" placeholder="Apellidos" required>
-                        <input type="text" class="form-control" id="txt_direccion" name="txt_direccion" value="" placeholder="Direccion" required>
-                        <input type="number" class="form-control" id="txt_telefono" name="txt_telefono" value="" placeholder="Telefono">
-                        <input type="email" class="form-control" id="txt_correo" name="txt_correo" value="" placeholder="Correo Electronico" required>
-                        <select id="dropSangre" name="drop_sangre" class="form-control"  >
-                            
+                        <input type="text" class="form-control"  id="txt_id" name="txt_id" value="0" placeholder="id" readonly>    
+                        <input type="text" class="form-control"  id="txt_producto" name="txt_producto" placeholder="Productos" required>
+                         <select id="txt_idmarca" name="txt_idmarca" class="form-control"  >
                         <%
-                            Estudiante clsEstudiante  = new Estudiante();
-                            List<List<String>> lista = clsEstudiante.listaTipoSangre();
+                            Productos clsProductos  = new Productos();
+                            List<List<String>> lista = clsProductos.listaTipoMarca();
                             
                             for(int i=0;i< lista.get(0).size() ;i++){
                                out.println("<option value='" +lista.get(0).get(i) +"'>" +lista.get(1).get(i) +"</option>");
                             }   
                         %>
-                        </select>
-                        <input type="date" class="form-control"  id="txt_nacimiento" name="txt_nacimiento" value="" placeholder="Feha Nacimiento" required>
+                         <input type="text" class="form-control" id="txt_descripcion" name="txt_descripcion" value="" placeholder="Descripcion" required>
+                        <input type="text" class="form-control" id="txt_imagen" name="txt_imagen" value="" placeholder="Imagen" required>
+                        <input type="number" class="form-control" id="txt_precio_costo" name="txt_precio_costo" value="" placeholder="Precio Costo">
+                        <input type="number" class="form-control" id="txt_precio_venta" name="txt_precio_venta" value="" placeholder="Precio Venta" required>
+                        <input type="number" class="form-control" id="txt_existencia" name="txt_existencia" value="" placeholder="Existencia" required>
+                        <input type="date" class="form-control"  id="txt_fecha_ingreso" name="txt_fecha_ingreso" value="" placeholder="Feha Ingreso" required>
                         <input type="submit" id="btnAgregar" name="btnAgregar" value="Agregar" class="btn btn-info btn-lg" >
                         <input type="submit" id="btnModificar" name="btnModificar" value="Modificar" class="btn btn-primary  btn-lg" >
                         <input type="submit" id="btnEliminar" name ="btnEliminar" value="Eliminar" onclick="javascript:if(!confirm('¿Desea Eliminar?'))return false" class="btn btn-danger btn-lg" >
@@ -107,24 +106,24 @@
                         <div class="table-responsive">
     <table class="table table-hover table-bordered">
                             <thead>
-                                <th>Carne</th>
-                                <th>Nombres</th>
-                                <th>Apellidos</th>
-                                <th>Direccion</th>
-                                <th>Telefono</th>
-                                <th>Correo</th>
-                                <th>Tipo_Sangre</th>
-                                <th>Fecha_nacimiento</th>
+                                <th>Producto</th>
+                                <th>Marca</th>
+                                <th>Descripcion</th>
+                                <th>Imagen</th>
+                                <th>Precio Costo</th>
+                                <th>Precio Venta</th>
+                                <th>Existencia</th>
+                                <th>Fecha Ingreso</th>
                             </thead>
-                            <tbody id="tbl_estudiante">
+                            <tbody id="tbl_productos">
                             <% 
-                                //Estudiante clsEstudiante2  = new Estudiante();
+                                
                                 DefaultTableModel tblModelo= new DefaultTableModel();
-                               tblModelo =clsEstudiante.llenarEstudiante();
+                               tblModelo =clsProductos.llenarProductos();
                                           for(int a=0;a< tblModelo.getRowCount();a++){
-                                out.println("<tr data-idestudiante="+ tblModelo.getValueAt(a,0).toString()  +" data-idts="+ tblModelo.getValueAt(a,9).toString()  +" >");
+                                out.println("<tr data-idProducto="+ tblModelo.getValueAt(a,0).toString()  +" data-idtm="+ tblModelo.getValueAt(a,2).toString()  +" >");
                                 out.println("<td>" + tblModelo.getValueAt(a,1).toString()  + "</td>");
-                                out.println("<td>" + tblModelo.getValueAt(a,2).toString()  + "</td>");
+                                out.println("<td>" + tblModelo.getValueAt(a,9).toString()  + "</td>");
                                 out.println("<td>" + tblModelo.getValueAt(a,3).toString()  + "</td>");
                                 out.println("<td>" + tblModelo.getValueAt(a,4).toString()  + "</td>");
                                 out.println("<td>" + tblModelo.getValueAt(a,5).toString()  + "</td>");
@@ -142,31 +141,33 @@
          </div>
    
 <script type="text/javascript">   
-$('#tbl_estudiante').on('click','tr td', function(evt){
-   var target,idEstudiante,idTipoSangre,carne,nombres,apellidos,direccion,telefono,correo,fnacimiento,tsangre;
+$('#tbl_productos').on('click','tr td', function(event){
+   var target,idProducto,idMarca,producto,marca,Descripcion,Imagen,precio_costo,precio_venta,existencia,fecha_ingreso;
    
    target = $(event.target);
-   idEstudiante = target.parent().data('idestudiante');
-   idTipoSangre= target.parent().data('idts');
-   carne= target.parents("tr").find("td").eq(0).html();
-   nombres= target.parents("tr").find("td").eq(1).html();
-   apellidos= target.parents("tr").find("td").eq(2).html();
-   direccion= target.parents("tr").find("td").eq(3).html();
-   telefono= target.parents("tr").find("td").eq(4).html();
-   correo= target.parents("tr").find("td").eq(5).html();
-   tsangre= target.parents("tr").find("td").eq(6).html();
-   fnacimiento= target.parents("tr").find("td").eq(7).html();
-   
-   $("#txtid").val(idEstudiante);
-   $("#txt_carne").val(carne);
-   $("#txt_nombres").val(nombres);
-   $("#txt_apellidos").val(apellidos);
-   $("#txt_direccion").val(direccion);
-   $("#txt_telefono").val(telefono);
-   $("#txt_correo").val(correo);
-   $("#drop_sangre").val(idTipoSangre);
-   $("#txt_nacimiento").attr("value",fnacimiento);
-   $('#modal_estudiante').modal('show');
+   idProducto = target.parent().data('idProducto');
+   idMarca= target.parent().data('idtm');
+   producto= target.parents("tr").find("td").eq(0).html();
+   marca=target.parents("tr").find("td").eq(1).html();
+   Descripcion= target.parents("tr").find("td").eq(2).html();
+   Imagen= target.parents("tr").find("td").eq(3).html();
+   precio_costo= target.parents("tr").find("td").eq(4).html();
+   precio_venta= target.parents("tr").find("td").eq(5).html();
+   existencia= target.parents("tr").find("td").eq(6).html();
+   fecha_ingreso= target.parents("tr").find("td").eq(7).html();
+   console.log(tmarca);
+  
+   $("#txt_id").val(idProducto);
+   $("#txt_producto").val(producto);
+   //$("#txt_idmarca").attr('selected','selected'); 
+   $("#txt_idmarca").val(idMarca);
+   $("#txt_descripcion").val(Descripcion);
+   $("#txt_imagen").val(Imagen);
+   $("#txt_precio_costo").val(precio_costo);
+   $("#txt_precio_venta").val(precio_venta);
+   $("#txt_existencia").val(existencia);
+   $("#txt_fecha_ingreso").attr("value",fecha_ingreso);
+   $('#modal_productos').modal('show');
    
    
 });
