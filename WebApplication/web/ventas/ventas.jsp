@@ -35,8 +35,7 @@
                             <th>Fecha ingreso</th>
                             </thead>
                             <tbody id="tbl_estudiante">
-                                <%  
-                                    Ventas clsVentas  = new Ventas();
+                                <%                                    Ventas clsVentas = new Ventas();
                                     DefaultTableModel tblModelo = new DefaultTableModel();
                                     tblModelo = clsVentas.llenarTabla();
                                     for (int a = 0; a < tblModelo.getRowCount(); a++) {
@@ -56,5 +55,6 @@
                     </div>                
                 </div>           
             </div>
+        </div>
     </body>
 </html>

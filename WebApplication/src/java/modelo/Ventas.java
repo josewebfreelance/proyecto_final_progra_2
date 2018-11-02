@@ -83,7 +83,23 @@ public class Ventas {
             clsConectar.abrirConexion();
 
             String query;
-            query = "SELECT * FROM ventas";
+            query = "select\n"
+                    + "dbempresa.ventas.idVenta,\n"
+                    + "dbempresa.ventas.nofactura,\n"
+                    + "dbempresa.ventas.serie,\n"
+                    + "dbempresa.ventas.fechafactura,\n"
+                    + "dbempresa.ventas.fechaingreso,\n"
+                    + "dbempresa.ventas.idCliente,\n"
+                    + "dbempresa.ventas.idempleado,\n"
+                    + "dbempresa.clientes.nombres as nombresCliente,\n"
+                    + "dbempresa.clientes.apellidos as apellidosCliente,\n"
+                    + "dbempresa.empleados.nombres as nombresEmpleados,\n"
+                    + "dbempresa.empleados.apellidos as apellidosEmpleados\n"
+                    + "from dbempresa.ventas\n"
+                    + "inner join dbempresa.clientes\n"
+                    + "inner join dbempresa.empleados\n"
+                    + "on \n"
+                    + "dbempresa.clientes.idCliente = dbempresa.ventas.idcliente and dbempresa.empleados.idEmpleado = dbempresa.ventas.idempleado;";
             ResultSet consulta = clsConectar.conexionBD.createStatement().executeQuery(query);
 
             String encabezado[] = {"id", "factura", "serie", "fechafactura", "idcliente", "idempleado", "fechaingreso"};
@@ -96,8 +112,8 @@ public class Ventas {
                 datos[1] = consulta.getString("nofactura");
                 datos[2] = consulta.getString("serie");
                 datos[3] = consulta.getString("fechafactura");
-                datos[4] = consulta.getString("idcliente");
-                datos[5] = consulta.getString("idempleado");
+                datos[4] = consulta.getString("nombresCliente");
+                datos[5] = consulta.getString("nombresEmpleados");
                 datos[6] = consulta.getString("fechaingreso");
                 tblModelo.addRow(datos);
             }
