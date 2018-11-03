@@ -16,7 +16,6 @@
         <title>Pagina Empleados</title>
         <link rel="stylesheet" href="../assets/bootstrap/Bootstrap v3.3.7/css/bootstrap.css">
         <link rel="stylesheet" href="../assets/bootstrap/Bootstrap v3.3.7/css/bootstrap-theme.min.css">
-        
         <script src="../assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
         <script src="../assets/js/bootstrap.js"></script>
                         
@@ -131,7 +130,7 @@
                                 <th>DPI</th>
                                 <th>Genero</th>
                                 <th>FechaNacimiento</th>
-                                <th>Id P.</th>
+                                <th hidden="hidden">Id P.</th>
                                 <th>Fecha Inicio Labores</th>
                                 <th>Fecha Ingreso</th>
                                 <th>Puesto</th>
@@ -147,9 +146,13 @@
                                 out.println("<td>" + tblModelo1.getValueAt(a,3).toString()  + "</td>");
                                 out.println("<td>" + tblModelo1.getValueAt(a,4).toString()  + "</td>");
                                 out.println("<td>" + tblModelo1.getValueAt(a,5).toString()  + "</td>");
-                                out.println("<td>" + tblModelo1.getValueAt(a,6).toString()  + "</td>");
+                                if (Integer.parseInt(tblModelo1.getValueAt(a,6).toString()) == 0) {
+                                    out.println("<td>Masculino</td>");   
+                                } else {
+                                    out.println("<td>Femenino</td>");
+                                }
                                 out.println("<td>" + tblModelo1.getValueAt(a,7).toString()  + "</td>");
-                                out.println("<td>" + tblModelo1.getValueAt(a,8).toString()  + "</td>");
+                                out.println("<td hidden='hidden'>" + tblModelo1.getValueAt(a,8).toString()  + "</td>");
                                 out.println("<td>" + tblModelo1.getValueAt(a,9).toString()  + "</td>");
                                 out.println("<td>" + tblModelo1.getValueAt(a,10).toString()  + "</td>");
                                 out.println("<td>" + tblModelo1.getValueAt(a,11).toString()  + "</td>");
@@ -202,7 +205,7 @@ $('#tbl_empleado').on('click','tr td', function(evt){
         <div class="container">
         <div class="navbar-header">    
                 <p class="navbar-brand">Desarollo Web: Giordy Estuardo Perez</p>
-        </div><!--/.nav-collapse -->
+        </divgit ><!--/.nav-collapse -->
       </div>
     </nav>
     </footer>
