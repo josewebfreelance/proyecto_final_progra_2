@@ -84,7 +84,7 @@
                         <input type="number" class="form-control" id="txtTelefono" name="txtTelefono" value="" placeholder="Telefono">
                         <input type="text" class="form-control" id="txtDpi" name="txtDpi" value="" placeholder="DPI" required>
                         <p>Genéro</p>
-                        <input type="radio" id="rBGenero" name="rBGenero" value="0"> Masculino<br>
+                        <input type="radio" id="rBGenero" name="rBGenero" value="0" > Masculino<br>
                         <input type="radio" id="rBGenero" name="rBGenero" value="1" > Femenino<br>
                         </p>
                         <p>Fecha Nacimiento:</p>
@@ -141,7 +141,7 @@
                                 DefaultTableModel tblModelo1= new DefaultTableModel();
                                tblModelo1 =clsPuestos.llenarEmpleado();
                                           for(int a=0;a< tblModelo1.getRowCount();a++){
-                                out.println("<tr data-id="+ tblModelo1.getValueAt(a,0).toString()  +" data-idpu="+ tblModelo1.getValueAt(a,9).toString()  +" >");
+                                out.println("<tr data-idp="+ tblModelo1.getValueAt(a,0).toString()  +" data-idpu="+ tblModelo1.getValueAt(a,6).toString()  +" >");
                                 out.println("<td>" + tblModelo1.getValueAt(a,1).toString()  + "</td>");
                                 out.println("<td>" + tblModelo1.getValueAt(a,2).toString()  + "</td>");
                                 out.println("<td>" + tblModelo1.getValueAt(a,3).toString()  + "</td>");
@@ -168,7 +168,7 @@ $('#tbl_empleado').on('click','tr td', function(evt){
  
    
    target = $(event.target);
-   idEmpleados = target.parent().data('id');
+   idEmpleados = target.parent().data('idp');
    idts= target.parent().data('idpu');
    Nombres= target.parents("tr").find("td").eq(0).html();
    Apellidos= target.parents("tr").find("td").eq(1).html();
@@ -186,7 +186,9 @@ $('#tbl_empleado').on('click','tr td', function(evt){
    $("#txtDireccion").val(Direccion);
    $("#txtTelefono").val(Telefono);
    $("#txtDpi").val(DPI);
-   $("#rBGenero").val(Genero);
+   var $radios = $('input:radio[name=rBGenero]');
+   $radios.filter('[value=0]').prop('checked', Genero);
+   $radios.filter('[value=1]').prop('checked', idts);//Con el filtro se busca el radio con el valor especificado.
    $("#txtFNacimiento").attr("value",FechaNacimiento);
    $("#droppuesto").val(Puesto);
    $("#txtFILab").val(Inicio_lab);
