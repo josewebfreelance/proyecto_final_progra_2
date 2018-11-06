@@ -5,6 +5,7 @@
  */
 package modelo;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +15,8 @@ import javax.swing.table.DefaultTableModel;
  * @author jlemusu
  */
 public class Ventas {
+
+    PreparedStatement parametro;
 
     private Conexion clsConectar;
 
@@ -125,6 +128,37 @@ public class Ventas {
             System.out.println(ex.getMessage());
             return tblModelo;
         }
+    }
+
+    public int ingresar() {
+        int retorno = 0;
+        try {
+
+            clsConectar = new Conexion();
+            clsConectar.abrirConexion();
+            String query;
+            query = "INSERT INTO ventas(idVenta,noFactura,serie,fechaFactura,idCliente,idEmpleado,fechaIngreso) "
+                    + "Values(?,?,?,?,?,?,now())";
+
+            parametro = (PreparedStatement) clsConectar.conexionBD.prepareStatement(query);
+            parametro.setInt(1, getIdVentas());
+            parametro.setInt(2, getNoFactura());
+            parametro.setString(3, getSerie());
+            parametro.setString(4, getFechaFactura());
+            parametro.setInt(5, getIdCliente());
+            parametro.setInt(6, getIdEmpleado());
+            int executar = parametro.executeUpdate();
+            clsConectar.cerrarConexion();
+
+            retorno = executar;
+
+        } catch (SQLException ex) {
+            clsConectar.cerrarConexion();
+            System.out.println(ex.getMessage());
+            retorno = 0;
+        }
+
+        return retorno;
     }
 
 }
