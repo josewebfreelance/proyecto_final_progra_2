@@ -56,7 +56,7 @@ public class Menu {
         this.url = url;
     }
 
-    public List<List<String>> obtenerMenu() {
+    public List<List<String>> obtenerListaMenu() {
         List<List<String>> lista = new ArrayList<List<String>>();
         lista.add(new ArrayList<String>());
         lista.add(new ArrayList<String>());
@@ -73,7 +73,7 @@ public class Menu {
                 lista.get(0).add(consulta.getString("idmenu"));
                 lista.get(1).add(consulta.getString("padre"));
                 lista.get(2).add(consulta.getString("menu"));
-                lista.get(3).add(consulta.getString("url"));                
+                lista.get(3).add(consulta.getString("url"));
             }
             clsConectar.cerrarConexion();
 
@@ -82,7 +82,34 @@ public class Menu {
             System.out.println(ex.getMessage());
         }
         return lista;
+    }
 
+    public List<List<String>> obtenerMenu(int id) {
+        List<List<String>> lista = new ArrayList<List<String>>();
+        lista.add(new ArrayList<String>());
+        lista.add(new ArrayList<String>());
+        lista.add(new ArrayList<String>());
+        lista.add(new ArrayList<String>());
+        try {
+            clsConectar = new Conexion();
+            clsConectar.abrirConexion();
+            String query;
+            query = "SELECT * FROM menu where padre = '" + id + "'";
+            ResultSet consulta = clsConectar.conexionBD.createStatement().executeQuery(query);
+
+            while (consulta.next()) {
+                lista.get(0).add(consulta.getString("idmenu"));
+                lista.get(1).add(consulta.getString("padre"));
+                lista.get(2).add(consulta.getString("menu"));
+                lista.get(3).add(consulta.getString("url"));
+            }
+            clsConectar.cerrarConexion();
+
+        } catch (SQLException ex) {
+            clsConectar.cerrarConexion();
+            System.out.println(ex.getMessage());
+        }
+        return lista;
     }
 
 }

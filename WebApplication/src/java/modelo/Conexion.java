@@ -19,7 +19,7 @@ public class Conexion {
     private final String bd="dbempresa";
     private final String urlConexion = "jdbc:"+sgdb +"://"+servidor+puerto+"/"+bd; 
     private final String usuario ="root";
-    private final String contra ="";
+    private final String contra ="root";
     private final String jdbc ="com.mysql.jdbc.Driver";
     
     public void abrirConexion(){

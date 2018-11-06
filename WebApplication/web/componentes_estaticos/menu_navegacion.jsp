@@ -9,9 +9,10 @@
 <div class="btn-group-vertical col-lg-12" role="group">
     <%
         Menu clsMenu = new Menu();
-        List<List<String>> listaMenu = clsMenu.obtenerMenu();
+        List<List<String>> listaMenu = clsMenu.obtenerListaMenu();
 
         String pagina_activa = (String) request.getParameter("seleccionado");
+        System.out.println(listaMenu.get(0).size());
 
         for (int i = 0; i < listaMenu.get(0).size(); i++) {
             out.println(""
