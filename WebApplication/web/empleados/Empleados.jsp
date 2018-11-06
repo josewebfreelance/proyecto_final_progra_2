@@ -16,6 +16,7 @@
         <title>Pagina Empleados</title>
         <link rel="stylesheet" href="../assets/bootstrap/Bootstrap v3.3.7/css/bootstrap.css">
         <link rel="stylesheet" href="../assets/bootstrap/Bootstrap v3.3.7/css/bootstrap-theme.min.css">
+        
         <script src="../assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
         <script src="../assets/js/bootstrap.js"></script>
                         
@@ -61,7 +62,7 @@
       </div>
     </nav>
     </header>
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal_empleado">Nuevo</button>
+        <button type="button" id="btnNuevo" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal_empleado">Nuevo</button>
     <!-- Modal -->
     
     
@@ -192,12 +193,18 @@ $('#tbl_empleado').on('click','tr td', function(evt){
    var $radios = $('input:radio[name=rBGenero]');
    $radios.filter('[value=0]').prop('checked', Genero);
    $radios.filter('[value=1]').prop('checked', idts);//Con el filtro se busca el radio con el valor especificado.
-   $("#txtFNacimiento").attr("value",FechaNacimiento);
+   $("#txtFNacimiento").val(FechaNacimiento);
    $("#droppuesto").val(Puesto);
    $("#txtFILab").val(Inicio_lab);
    $('#modal_empleado').modal('show');
-});
+   
 
+$('#modal_empleado').on('hidden.bs.modal', function(){ 
+		$(this).find('form')[0].reset(); //para borrar todos los datos que tenga los input, textareas, select.
+		$("label.error").remove();  //lo utilice para borrar la etiqueta de error del jquery validate
+	});
+
+});
 </script>        
     </body>
     <footer>
@@ -205,7 +212,7 @@ $('#tbl_empleado').on('click','tr td', function(evt){
         <div class="container">
         <div class="navbar-header">    
                 <p class="navbar-brand">Desarollo Web: Giordy Estuardo Perez</p>
-        </divgit ><!--/.nav-collapse -->
+        </div><!--/.nav-collapse -->
       </div>
     </nav>
     </footer>
