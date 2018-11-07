@@ -6,7 +6,7 @@
 
 <%@page import="java.util.List"%>
 <%@page import="modelo.Menu"%>
-<div class="btn-group-vertical col-lg-12" role="group">
+<ol class="col-lg-12" role="group">
     <%! public String test() {
             String f = "test";
             return f;
@@ -20,18 +20,16 @@
 
         for (int i = 0; i < listaSize.get(0).size(); i++) {
           %>  
-          <%= test() %>
+
         <%
 
             listaMenu = clsMenu.obtenerMenu(Integer.parseInt(listaSize.get(0).get(i)));
 
             out.println(""
-                    + "<div class='btn-group' role='group'>"
-                    + "<button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"
+                    + "<li>"
+
                     + listaSize.get(2).get(i)
-                    + "<span class='caret'></span>"
-                    + "</button>"
-                    + "<ul class='dropdown-menu'>");
+                    + "<ul>");
 
             for (int j = 0; j < listaMenu.get(0).size(); j++) {
                 System.out.println(Integer.parseInt(listaMenu.get(1).get(j)));
@@ -41,7 +39,7 @@
             }
 
             out.println("</ul>"
-                    + "</div>");
+                    + "</li>");
 
             /*out.println(""
                     + "<a id='" + listaSize.get(0).get(i) + "' href='../" + listaSize.get(3).get(i) + ".jsp?seleccionado=" + listaSize.get(0).get(i) + "' class='btn btn-default dropdown-toggle'>"
@@ -54,4 +52,4 @@
             out.println("<label>" + listaMenu.get(2) + "</label>");*/
         }
     %>
-</div>
+</ol>
