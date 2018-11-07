@@ -5,6 +5,7 @@
  */
 // Menus obtenidos
 let menus = [];
+let idNuevoDetalle = 1;
 
 function cerrarSesion() {
     // $(window).replaceAll('location', '/proyecto_final_progra_2/');

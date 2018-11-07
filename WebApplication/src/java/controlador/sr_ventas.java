@@ -47,6 +47,7 @@ public class sr_ventas extends HttpServlet {
                     response.sendRedirect(request.getContextPath() + "/ventas/crud_ventas.jsp?seleccionado=3");
                 }
             }
+            
 
         }
     }
