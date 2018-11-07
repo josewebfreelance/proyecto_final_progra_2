@@ -7,18 +7,24 @@
 <%@page import="java.util.List"%>
 <%@page import="modelo.Menu"%>
 <div class="btn-group-vertical col-lg-12" role="group">
-    <%! public void test(){} %>
+    <%! public String test() {
+            String f = "test";
+            return f;
+        }%>
     <%
         Menu clsMenu = new Menu();
         List<List<String>> listaSize, listaMenu;
         listaSize = clsMenu.obtenerListaMenu();
-        
-        String pagina_activa = (String) request.getParameter("seleccionado");        
-       
+
+        String pagina_activa = (String) request.getParameter("seleccionado");
+
         for (int i = 0; i < listaSize.get(0).size(); i++) {
-            
+          %>  
+          <%= test() %>
+        <%
+
             listaMenu = clsMenu.obtenerMenu(Integer.parseInt(listaSize.get(0).get(i)));
-            
+
             out.println(""
                     + "<div class='btn-group' role='group'>"
                     + "<button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>"
@@ -26,14 +32,14 @@
                     + "<span class='caret'></span>"
                     + "</button>"
                     + "<ul class='dropdown-menu'>");
-            
+
             for (int j = 0; j < listaMenu.get(0).size(); j++) {
                 System.out.println(Integer.parseInt(listaMenu.get(1).get(j)));
                 if (Integer.parseInt(listaSize.get(0).get(i)) == Integer.parseInt(listaMenu.get(1).get(j))) {
                     out.println("<li><a href='#'>" + listaMenu.get(2).get(j) + "</a></li>");
                 }
             }
-            
+
             out.println("</ul>"
                     + "</div>");
 
