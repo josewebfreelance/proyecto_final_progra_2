@@ -35,7 +35,6 @@ public class sr_ventas extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
 
             Ventas clsVentas = new Ventas();
-            clsVentas.setIdVentas(Integer.parseInt(request.getParameter("txt_id")));
             clsVentas.setNoFactura(Integer.parseInt(request.getParameter("txt_factura")));
             clsVentas.setSerie(request.getParameter("txt_serie"));
             clsVentas.setFechaFactura(request.getParameter("txt_fecha_factura"));
@@ -44,9 +43,8 @@ public class sr_ventas extends HttpServlet {
             clsVentas.setFechaIngreso(request.getParameter("txt_fecha_ingreso"));
 
             if (request.getParameter("btnAgregar") != null) {
-                clsVentas.ingresar();
                 if (clsVentas.ingresar() > 0) {
-                    out.println("correcto");
+                    response.sendRedirect(request.getContextPath() + "/ventas/crud_ventas.jsp?seleccionado=3");
                 }
             }
 

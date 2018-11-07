@@ -24,6 +24,8 @@
                     <%@include file="../componentes_estaticos/menu_navegacion.jsp" %>
                 </div>
                 <div class="col-lg-10">
+                    
+                    <a class="btn btn-primary" href="/proyecto_final_progra_2/ventas/crud_ventas.jsp?seleccionado=3">Nuevo</a>
 
                     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal_venta">Nuevo</button>
 
@@ -37,11 +39,6 @@
                                         <h3 class="modal-title">Venta</h3>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="row">
-                                            <div class="form-group col-lg-2">
-                                                <input type="text" class="form-control"  id="txt_id" name="txt_id" value="0" placeholder="id" readonly>                                                    
-                                            </div>
-                                        </div>
                                         <div class="row">
                                             <div class="form-group col-lg-3">
                                                 <input type="text" class="form-control" id="txt_factura" name="txt_factura" placeholder="factura" required>                                                
