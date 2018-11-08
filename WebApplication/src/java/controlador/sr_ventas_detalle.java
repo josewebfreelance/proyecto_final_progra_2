@@ -11,14 +11,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Ventas;
 import modelo.VentasDetalle;
 
 /**
  *
  * @author jlemusus
  */
-public class sr_ventas extends HttpServlet {
+public class sr_ventas_detalle extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,32 +33,14 @@ public class sr_ventas extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-
-            Ventas clsVentas = new Ventas();
-            clsVentas.setNoFactura(Integer.parseInt(request.getParameter("txt_factura")));
-            clsVentas.setSerie(request.getParameter("txt_serie"));
-            clsVentas.setFechaFactura(request.getParameter("txt_fecha_factura"));
-            clsVentas.setIdCliente(Integer.parseInt(request.getParameter("txt_id_cliente")));
-            clsVentas.setIdEmpleado(Integer.parseInt(request.getParameter("txt_id_empleado")));
-            clsVentas.setFechaIngreso(request.getParameter("txt_fecha_ingreso"));
-
             VentasDetalle clsVentasDetalle = new VentasDetalle();
-
+            
             clsVentasDetalle.setIdVenta(Integer.parseInt(request.getParameter("idVenta")));
             clsVentasDetalle.setIdProducto(Integer.parseInt(request.getParameter("idProducto")));
             clsVentasDetalle.setCantidad(request.getParameter("cantidad"));
             clsVentasDetalle.setPrecioUnitario(request.getParameter("precio"));
-
-            request.setAttribute("dVentas", clsVentasDetalle);
-
-            System.out.println(request.getAttribute("dVentas"));
-
-            if (request.getParameter("btnAgregar") != null) {
-                if (clsVentas.ingresar() > 0) {
-                    response.sendRedirect(request.getContextPath() + "/ventas/crud_ventas.jsp?seleccionado=3");
-                }
-            }
-
+            
+            out.println(clsVentasDetalle.getIdVenta());
         }
     }
 

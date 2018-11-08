@@ -57,7 +57,6 @@
 
                         <table class="table" id="tableDetalleVenta">
                             <thead>
-                            <th hidden="hidden">idDetalle</th>
                             <th hidden="hidden">idVenta</th>
                             <th>Producto</th>
                             <th>Cantidad</th>
@@ -66,16 +65,15 @@
                             </thead>
                             <tbody>
                                 <tr id="1">
-                                    <td hidden="hidden"></td>
-                                    <td></td>
+                                    <td hidden="hidden"><input type="hidden" name="idVenta" value="1"></td>
                                     <td>
-                                        <select class="form-control" name="producto1">
+                                        <select class="form-control" name="idProducto">
                                             <option value="1">producto 1</option>
                                             <option>producto 2</option>
                                         </select>
                                     </td>
-                                    <td><input class="form-control" name="cantidad1" type="number" placeholder="Cantidad"></td>
-                                    <td><input class="form-control" name="precio1" type="number" placeholder="Precio"></td>
+                                    <td><input class="form-control" name="cantidad" type="number" placeholder="Cantidad"></td>
+                                    <td><input class="form-control" name="precio" type="number" placeholder="Precio"></td>
                                     <td>
                                         <button type="button" class="btn btn-primary" onclick="agregarDetalleVenta(1);" >Nuevo</button>
                                     </td>
@@ -89,15 +87,17 @@
 
         <script>
             function agregarDetalleVenta(id, domElement) {
-            let tbodyDetalleVenta = document.getElementById("tableDetalleVenta");
-            idNuevoDetalle += id;
-            const rowM = tbodyDetalleVenta.insertRow(tbodyDetalleVenta.rows.length);
-            const cell1 = rowM.insertCell(0);
-            const cell2 = rowM.insertCell(1);
-            const cell3 = rowM.insertCell(2);
-            cell1.innerHTML = "<select class=\"form-control\" name=\"producto" + idNuevoDetalle + "\"><option value=\"1\">producto 1</option><option>producto 2</option></select>";
-            cell2.innerHTML = "<input class=\"form-control\" name=\"cantidad" + idNuevoDetalle + "\" type=\"number\" placeholder=\"Cantidad\">";
-            cell3.innerHTML = "<input class=\"form-control\" name=\"precio" + idNuevoDetalle + "\" type=\"number\" placeholder=\"Precio\">";
+                let tbodyDetalleVenta = document.getElementById("tableDetalleVenta");
+                idNuevoDetalle += id;
+                const rowM = tbodyDetalleVenta.insertRow(tbodyDetalleVenta.rows.length);
+                const cell1 = rowM.insertCell(0);
+                const cell2 = rowM.insertCell(1);
+                const cell3 = rowM.insertCell(2);
+                const cell4 = rowM.insertCell(3);
+                cell1.innerHTML = "<input type=\"hidden\" name=\"idVenta\" value=\"1\">";
+                cell2.innerHTML = "<select class=\"form-control\" name=\"idProducto\"><option value=\"1\">producto 1</option><option>producto 2</option></select>";
+                cell3.innerHTML = "<input class=\"form-control\" name=\"cantidad\" type=\"number\" placeholder=\"Cantidad\">";
+                cell4.innerHTML = "<input class=\"form-control\" name=\"precio\" type=\"number\" placeholder=\"Precio\">";
             }
         </script>
     </body>

@@ -9,7 +9,7 @@ package modelo;
  *
  * @author jlemusu
  */
-public class Ventas_Detalle {
+public class VentasDetalle {
     
     private int idVentaDetalle, idVenta, idProducto;
     private String cantidad, precioUnitario;
