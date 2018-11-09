@@ -6,7 +6,11 @@
 package modelo;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -68,8 +72,7 @@ public class VentasDetalle {
             clsConectar = new Conexion();
             clsConectar.abrirConexion();
             String query;
-            query = "INSERT INTO ventas_detalle(idVenta, idProducto, cantidad, precio_unitario) "
-                    + "Values(?,?,?,?)";
+            query = "INSERT INTO ventas_detalle(idVenta, idProducto, cantidad, precio_unitario)Values(?,?,?,?)";
 
             parametro = (PreparedStatement) clsConectar.conexionBD.prepareStatement(query);
             parametro.setInt(1, getIdVenta());
@@ -88,6 +91,62 @@ public class VentasDetalle {
         }
 
         return retorno;
+    }
+
+    public DefaultTableModel llenarDetalleVenta(int ventaId) {
+        DefaultTableModel tblModelo = new DefaultTableModel();
+        try {
+            clsConectar = new Conexion();
+            clsConectar.abrirConexion();
+
+            String query;
+            query = "SELECT * FROM dbempresa.ventas_detalle where idVenta = " + ventaId + "";
+            ResultSet consulta = clsConectar.conexionBD.createStatement().executeQuery(query);
+            String encabezado[] = {"idventa_detalle", "idVenta", "idProducto", "cantidad", "precio_unitario"};
+
+            tblModelo.setColumnIdentifiers(encabezado);
+            String datos[] = new String[5];
+            while (consulta.next()) {
+                datos[0] = consulta.getString("idventa_detalle");
+                datos[1] = consulta.getString("idVenta");
+                datos[2] = consulta.getString("idProducto");
+                datos[3] = consulta.getString("cantidad");
+                datos[4] = consulta.getString("precio_unitario");
+                tblModelo.addRow(datos);
+            }
+            clsConectar.cerrarConexion();
+            return tblModelo;
+        } catch (SQLException ex) {
+            clsConectar.cerrarConexion();
+            System.out.println(ex.getMessage());
+            return tblModelo;
+        }
+    }
+
+    public List<List<String>> selectGenerico(String queryDb, String id, String nombre) {
+        List<List<String>> clientes = new ArrayList<List<String>>();
+        clientes.add(new ArrayList<String>());
+        clientes.add(new ArrayList<String>());
+
+        try {
+            clsConectar = new Conexion();
+            clsConectar.abrirConexion();
+            String query;
+            query = queryDb;
+            ResultSet consulta = clsConectar.conexionBD.createStatement().executeQuery(query);
+
+            while (consulta.next()) {
+                clientes.get(0).add(consulta.getString(id));
+                clientes.get(1).add(consulta.getString(nombre));
+            }
+
+            clsConectar.cerrarConexion();
+
+        } catch (SQLException ex) {
+            clsConectar.cerrarConexion();
+            System.out.println(ex.getMessage());
+        }
+        return clientes;
     }
 
 }

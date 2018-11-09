@@ -4,10 +4,22 @@
     Author     : jlemusus
 --%>
 
+<%@page import="modelo.VentasDetalle"%>
+<%@page import="javax.swing.table.DefaultTableModel"%>
 <%@page import="modelo.Ventas"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    boolean enCurso = Boolean.parseBoolean(request.getParameter("enCurso"));
     Ventas clsVentas = new Ventas();
+    VentasDetalle clsVentasDetalle = new VentasDetalle();
+    int idVenta = 0;
+
+    List<List<String>> ultimaVenta = clsVentas.obtenerUltimaVenta();
+
+    for (int i = 0; i < ultimaVenta.get(0).size(); i++) {
+        idVenta = Integer.parseInt(ultimaVenta.get(0).get(i));
+    }
+
 %>
 <!DOCTYPE html>
 <html>
@@ -22,7 +34,7 @@
                     <%@include file="../componentes_estaticos/menu_navegacion.jsp" %>
                 </div>
                 <div class="col-lg-10">
-                    <form action="sr_ventas" class="form-horizontal" method="post" >
+                    <form action="sr_ventas" method="post" >
 
                         <div class="row">
                             <div class="form-group col-lg-3">
@@ -37,84 +49,116 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-lg-2">
-                                <input type="text" class="form-control" id="txt_id_cliente" name="txt_id_cliente" value="" placeholder="cliente">                                                
+                                <select id="txt_id_cliente" name="txt_id_cliente" class="form-control"  >
+                                    <%                                        List<List<String>> cliente = clsVentasDetalle.selectGenerico("SELECT idCliente, nombres FROM dbempresa.clientes", "idCliente", "nombres");
+
+                                        for (int i = 0; i < cliente.get(0).size(); i++) {
+                                            out.println("<option value='" + cliente.get(0).get(i) + "'>" + cliente.get(1).get(i) + "</option>");
+                                        }
+                                    %>
+                                </select>
                             </div>
                             <div class="form-group col-lg-2">
-                                <input type="text" class="form-control" id="txt_id_empleado" name="txt_id_empleado" value="" placeholder="empleado" required>                                                
+                                <select id="txt_id_empleado" name="txt_id_empleado" class="form-control"  >
+                                    <%
+                                        List<List<String>> empleado = clsVentasDetalle.selectGenerico("SELECT idEmpleado, nombres FROM dbempresa.empleados", "idEmpleado", "nombres");
+
+                                        for (int i = 0; i < empleado.get(0).size(); i++) {
+                                            out.println("<option value='" + empleado.get(0).get(i) + "'>" + empleado.get(1).get(i) + "</option>");
+                                        }
+                                    %>
+                                </select>
                             </div>
                             <div class="form-group col-lg-2">
                                 <input onchange="this.form.submit()" type="date" class="form-control" id="txt_fecha_ingreso" name="txt_fecha_ingreso" value="" placeholder="Fecha ingreso" required>                                               
                             </div>
                         </div>
 
-                        <div class="modal-footer">
+                        <!--<div class="modal-footer">
                             <input type="submit" id="btnAgregar" name="btnAgregar" value="Agregar" class="btn btn-info" >
                             <input type="submit" id="btnModificar" name="btnModificar" value="Modificar" class="btn btn-primary  btn-lg" >
                             <input type="submit" id="btnEliminar" name ="btnEliminar" value="Eliminar" onclick="javascript:if (!confirm("¿Desea Eliminar?"))
                                    return false" class="btn btn-danger btn-lg" >
                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                        </div>
+                        </div>-->
 
                     </form>
 
+                    <h3>Detalle</h3>
                     <table class="table" id="tableDetalleVenta">
                         <thead>
+                        <th></th>
+                        <th hidden="hidden"></th>
                         <th hidden="hidden">idVenta</th>
                         <th>Producto</th>
                         <th>Cantidad</th>
                         <th>Precio unitario</th>
-                        <th></th>
                         </thead>
                         <tbody>
-                        <form>
-                            <tr id="1">
-                                <td hidden="hidden"><input type="hidden" name="txt_idventa" value="1"></td>
+                            <%
+                                if (enCurso == true) {
+                                    DefaultTableModel tblModelo = new DefaultTableModel();
+                                    tblModelo = clsVentasDetalle.llenarDetalleVenta(idVenta);
+
+                                    for (int a = 0; a < tblModelo.getRowCount(); a++) {
+                                        out.println("<tr>");
+                                        out.println("<td>" + (a + 1) + "</td>");
+                                        out.println("<td hidden=\"hidden\"><input type=\"number\" name=\"txt_id_venta_detalle\" value=\"" + tblModelo.getValueAt(a, 0).toString() + "\"></td>");
+                                        out.println("<td hidden=\"hidden\"><input type=\"number\" name=\"txt_id_venta\" value=\"" + tblModelo.getValueAt(a, 1).toString() + "\"></td>");
+                                        /*out.println("<td><select id=\"txt_idproducto\" name=\"txt_idproducto\" class=\"form-control\">");
+                                            List<List<String>> producto = clsVentasDetalle.selectGenerico("SELECT idProducto, producto FROM dbempresa.productos", "idProducto", "producto");
+                                            for (int i = 0; i < producto.get(0).size(); i++) {
+                                                out.println("<option value='" + producto.get(0).get(i) + "'>" + producto.get(1).get(i) + "</option>");
+                                            }
+                                        out.println("</select></td>");*/
+                                        out.println("<td><input class=\"form-control\" type=\"number\" name=\"txt_id_producto\" value=\"" + tblModelo.getValueAt(a, 2).toString() + "\"></td>");
+                                        out.println("<td><input class=\"form-control\" type=\"number\" name=\"txt_cantidad\" value=\"" + tblModelo.getValueAt(a, 3).toString() + "\"></td>");
+                                        out.println("<td><input class=\"form-control\" type=\"number\" name=\"txt_precio_unitario\" value=\"" + tblModelo.getValueAt(a, 4).toString() + "\"></td>");
+                                        out.println("</tr>");
+                                        
+                                        // out.println("<script>obtenerProductoId('" + tblModelo.getValueAt(a, 2).toString() + "');</script>");
+                                    }
+                                }
+
+                            %>
+                        <form method="post" action="sr_ventas_detalle">
+                            <tr>
+                                <td></td>
+                                <td hidden="hidden"><input class="form-control" type="number" name="txt_iddetalle"></td>
+                                <td hidden="hidden"><input type="hidden" id="txt_idventa" name="txt_idventa" ></td>
                                 <td>
-                                    <select class="form-control" name="txt_idproducto">
-                                        <option value="1">producto 1</option>
-                                        <option>producto 2</option>
+                                    <select id="txt_idproducto" name="txt_idproducto" class="form-control"  >
+                                        <%                                            List<List<String>> producto = clsVentasDetalle.selectGenerico("SELECT idProducto, producto FROM dbempresa.productos", "idProducto", "producto");
+                                            for (int i = 0; i < producto.get(0).size(); i++) {
+                                                out.println("<option value='" + producto.get(0).get(i) + "'>" + producto.get(1).get(i) + "</option>");
+                                            }
+                                        %>
                                     </select>
                                 </td>
                                 <td><input class="form-control" name="txt_cantidad" type="number" placeholder="Cantidad"></td>
-                                <td><input class="form-control" name="txt_precio" type="number" placeholder="Precio"></td>
-                                <td>
-
-                                    <button type="button" class="btn btn-primary" onclick="agregarDetalleVenta(1);" >Nuevo</button>
-                                </td>
+                                <td><input onchange="this.form.submit()" class="form-control" name="txt_precio" type="number" placeholder="Precio"></td>
                             </tr>
                         </form>
                         </tbody>
                     </table>
 
-
                 </div>
             </div>
         </div>
 
-        <%                boolean enCurso = Boolean.parseBoolean(request.getParameter("enCurso"));
-            if (enCurso == true) {
-                List<List<String>> ultimaVenta = clsVentas.obtenerUltimaVenta();
-
+        <%            if (enCurso == true) {
                 for (int i = 0; i < ultimaVenta.get(0).size(); i++) {
-                    out.println("<script>obtenerValoresVenta('" + ultimaVenta.get(1).get(i) + "','" + ultimaVenta.get(2).get(i) + "','" + ultimaVenta.get(3).get(i) + "','" + ultimaVenta.get(4).get(i) + "','" + ultimaVenta.get(5).get(i) + "','" + ultimaVenta.get(6).get(i) + "');</script>");
+
+                    out.println("<script>obtenerValoresVenta('" + ultimaVenta.get(0).get(i) + "',"
+                            + "'" + ultimaVenta.get(1).get(i) + "',"
+                            + "'" + ultimaVenta.get(2).get(i) + "',"
+                            + "'" + ultimaVenta.get(3).get(i) + "',"
+                            + "'" + ultimaVenta.get(4).get(i) + "',"
+                            + "'" + ultimaVenta.get(5).get(i) + "',"
+                            + "'" + ultimaVenta.get(6).get(i) + "');</script>");
                 }
             }
         %>
 
-        <!--<script>
-            function agregarDetalleVenta(id, domElement) {
-                let tbodyDetalleVenta = document.getElementById("tableDetalleVenta");
-                idNuevoDetalle += id;
-                const rowM = tbodyDetalleVenta.insertRow(tbodyDetalleVenta.rows.length);
-                const cell1 = rowM.insertCell(0);
-                const cell2 = rowM.insertCell(1);
-                const cell3 = rowM.insertCell(2);
-                const cell4 = rowM.insertCell(3);
-                cell1.innerHTML = "<input type=\"hidden\" name=\"idVenta\" value=\"1\">";
-                cell2.innerHTML = "<select class=\"form-control\" name=\"idProducto\"><option value=\"1\">producto 1</option><option>producto 2</option></select>";
-                cell3.innerHTML = "<input class=\"form-control\" name=\"cantidad\" type=\"number\" placeholder=\"Cantidad\">";
-                cell4.innerHTML = "<input class=\"form-control\" name=\"precio\" type=\"number\" placeholder=\"Precio\">";
-            }
-        </script>-->
     </body>
 </html>

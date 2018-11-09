@@ -28,18 +28,32 @@ function activarMenu(seleccionado, comparar) {
     }
 }
 
-function obtenerValoresVenta(factura, serie, fechafactura, idcliente, idempleado, fechaingreso) {
+function obtenerValoresVenta(idVenta, factura, serie, fechafactura, idcliente, idempleado, fechaingreso) {
     const txt_factura = document.querySelector("#txt_factura");
     const txt_serie = document.querySelector("#txt_serie");
     const txt_fecha_factura = document.querySelector("#txt_fecha_factura");
     const txt_id_cliente = document.querySelector("#txt_id_cliente");
     const txt_id_empleado = document.querySelector("#txt_id_empleado");
     const txt_fecha_ingreso = document.querySelector("#txt_fecha_ingreso");
-    
+
+    // VENTAS DETALLE
+
+    const txt_id_venta = document.querySelector("#txt_idventa");
+
     txt_factura.value = factura;
     txt_serie.value = serie;
     txt_fecha_factura.value = fechafactura;
     txt_id_cliente.value = idcliente;
     txt_id_empleado.value = idempleado;
     txt_fecha_ingreso.value = fechaingreso;
+
+    // VENTAS DETALLE
+
+    txt_id_venta.value = idVenta;
+}
+
+function obtenerProductoId(id) {
+    const txt_id_producto = document.querySelector("#txt_id_producto");
+    
+    txt_id_producto.value = id;
 }

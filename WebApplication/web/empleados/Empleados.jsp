@@ -67,7 +67,7 @@
                                                         out.println("<option value='" + lista.get(0).get(i) + "'>" + lista.get(1).get(i) + "</option>");
                                                     }
                                                 %>
-                                            </select></p>
+                                            </select>
                                             <p>Inicio de Labores:</p>
                                             <input type="date" class="form-control"  id="txtFILab" name="txtFILab" value="" placeholder="Inicio Labores" required>
                                             <input type="submit" id="btnAgregar" name="btnAgregar" value="Agregar" class="btn btn-info btn-lg" >
