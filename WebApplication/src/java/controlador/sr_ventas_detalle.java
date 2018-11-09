@@ -34,13 +34,16 @@ public class sr_ventas_detalle extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             VentasDetalle clsVentasDetalle = new VentasDetalle();
-            
-            clsVentasDetalle.setIdVenta(Integer.parseInt(request.getParameter("idVenta")));
-            clsVentasDetalle.setIdProducto(Integer.parseInt(request.getParameter("idProducto")));
-            clsVentasDetalle.setCantidad(request.getParameter("cantidad"));
-            clsVentasDetalle.setPrecioUnitario(request.getParameter("precio"));
-            
+
+
             out.println(clsVentasDetalle.getIdVenta());
+
+            if (request.getParameter("btnAgregar") != null) {
+                if (clsVentasDetalle.ingresarDetalle() > 0) {
+                    response.sendRedirect(request.getContextPath() + "/ventas/crud_ventas.jsp?seleccionado=3");
+                }
+            }
+
         }
     }
 

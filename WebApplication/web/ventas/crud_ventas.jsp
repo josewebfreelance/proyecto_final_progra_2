@@ -22,7 +22,7 @@
                     <%@include file="../componentes_estaticos/menu_navegacion.jsp" %>
                 </div>
                 <div class="col-lg-10">
-                    <form action="sr_ventas" class="form-horizontal" method="post" >                            
+                    <form action="sr_ventas" class="form-horizontal" method="post" >
 
                         <div class="row">
                             <div class="form-group col-lg-3">
@@ -43,49 +43,65 @@
                                 <input type="text" class="form-control" id="txt_id_empleado" name="txt_id_empleado" value="" placeholder="empleado" required>                                                
                             </div>
                             <div class="form-group col-lg-2">
-                                <input type="date" class="form-control" id="txt_fecha_ingreso" name="txt_fecha_ingreso" value="" placeholder="Fecha ingreso" required>                                               
+                                <input onchange="this.form.submit()" type="date" class="form-control" id="txt_fecha_ingreso" name="txt_fecha_ingreso" value="" placeholder="Fecha ingreso" required>                                               
                             </div>
                         </div>
 
                         <div class="modal-footer">
-                            <input type="submit" id="btnAgregar" name="btnAgregar" value="Agregar" class="btn btn-info btn-lg" >
+                            <input type="submit" id="btnAgregar" name="btnAgregar" value="Agregar" class="btn btn-info" >
                             <input type="submit" id="btnModificar" name="btnModificar" value="Modificar" class="btn btn-primary  btn-lg" >
                             <input type="submit" id="btnEliminar" name ="btnEliminar" value="Eliminar" onclick="javascript:if (!confirm("¿Desea Eliminar?"))
                                    return false" class="btn btn-danger btn-lg" >
                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                         </div>
 
-                        <table class="table" id="tableDetalleVenta">
-                            <thead>
-                            <th hidden="hidden">idVenta</th>
-                            <th>Producto</th>
-                            <th>Cantidad</th>
-                            <th>Precio unitario</th>
-                            <th></th>
-                            </thead>
-                            <tbody>
-                                <tr id="1">
-                                    <td hidden="hidden"><input type="hidden" name="idVenta" value="1"></td>
-                                    <td>
-                                        <select class="form-control" name="idProducto">
-                                            <option value="1">producto 1</option>
-                                            <option>producto 2</option>
-                                        </select>
-                                    </td>
-                                    <td><input class="form-control" name="cantidad" type="number" placeholder="Cantidad"></td>
-                                    <td><input class="form-control" name="precio" type="number" placeholder="Precio"></td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary" onclick="agregarDetalleVenta(1);" >Nuevo</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </form>
+
+                    <table class="table" id="tableDetalleVenta">
+                        <thead>
+                        <th hidden="hidden">idVenta</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio unitario</th>
+                        <th></th>
+                        </thead>
+                        <tbody>
+                        <form>
+                            <tr id="1">
+                                <td hidden="hidden"><input type="hidden" name="txt_idventa" value="1"></td>
+                                <td>
+                                    <select class="form-control" name="txt_idproducto">
+                                        <option value="1">producto 1</option>
+                                        <option>producto 2</option>
+                                    </select>
+                                </td>
+                                <td><input class="form-control" name="txt_cantidad" type="number" placeholder="Cantidad"></td>
+                                <td><input class="form-control" name="txt_precio" type="number" placeholder="Precio"></td>
+                                <td>
+
+                                    <button type="button" class="btn btn-primary" onclick="agregarDetalleVenta(1);" >Nuevo</button>
+                                </td>
+                            </tr>
+                        </form>
+                        </tbody>
+                    </table>
+
+
                 </div>
             </div>
         </div>
 
-        <script>
+        <%                boolean enCurso = Boolean.parseBoolean(request.getParameter("enCurso"));
+            if (enCurso == true) {
+                List<List<String>> ultimaVenta = clsVentas.obtenerUltimaVenta();
+
+                for (int i = 0; i < ultimaVenta.get(0).size(); i++) {
+                    out.println("<script>obtenerValoresVenta('" + ultimaVenta.get(1).get(i) + "','" + ultimaVenta.get(2).get(i) + "','" + ultimaVenta.get(3).get(i) + "','" + ultimaVenta.get(4).get(i) + "','" + ultimaVenta.get(5).get(i) + "','" + ultimaVenta.get(6).get(i) + "');</script>");
+                }
+            }
+        %>
+
+        <!--<script>
             function agregarDetalleVenta(id, domElement) {
                 let tbodyDetalleVenta = document.getElementById("tableDetalleVenta");
                 idNuevoDetalle += id;
@@ -99,6 +115,6 @@
                 cell3.innerHTML = "<input class=\"form-control\" name=\"cantidad\" type=\"number\" placeholder=\"Cantidad\">";
                 cell4.innerHTML = "<input class=\"form-control\" name=\"precio\" type=\"number\" placeholder=\"Precio\">";
             }
-        </script>
+        </script>-->
     </body>
 </html>

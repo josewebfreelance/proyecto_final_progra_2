@@ -36,28 +36,17 @@ public class sr_ventas extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
 
             Ventas clsVentas = new Ventas();
+
             clsVentas.setNoFactura(Integer.parseInt(request.getParameter("txt_factura")));
             clsVentas.setSerie(request.getParameter("txt_serie"));
             clsVentas.setFechaFactura(request.getParameter("txt_fecha_factura"));
             clsVentas.setIdCliente(Integer.parseInt(request.getParameter("txt_id_cliente")));
             clsVentas.setIdEmpleado(Integer.parseInt(request.getParameter("txt_id_empleado")));
             clsVentas.setFechaIngreso(request.getParameter("txt_fecha_ingreso"));
+            out.println(clsVentas.getSerie());
 
-            VentasDetalle clsVentasDetalle = new VentasDetalle();
-
-            clsVentasDetalle.setIdVenta(Integer.parseInt(request.getParameter("idVenta")));
-            clsVentasDetalle.setIdProducto(Integer.parseInt(request.getParameter("idProducto")));
-            clsVentasDetalle.setCantidad(request.getParameter("cantidad"));
-            clsVentasDetalle.setPrecioUnitario(request.getParameter("precio"));
-
-            request.setAttribute("dVentas", clsVentasDetalle);
-
-            System.out.println(request.getAttribute("dVentas"));
-
-            if (request.getParameter("btnAgregar") != null) {
-                if (clsVentas.ingresar() > 0) {
-                    response.sendRedirect(request.getContextPath() + "/ventas/crud_ventas.jsp?seleccionado=3");
-                }
+            if (clsVentas.ingresar() > 0) {
+                response.sendRedirect(request.getContextPath() + "/ventas/crud_ventas.jsp?seleccionado=3&&enCurso=true");
             }
 
         }

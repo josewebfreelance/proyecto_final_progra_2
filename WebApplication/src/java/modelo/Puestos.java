@@ -41,8 +41,7 @@ public class Puestos extends Empleados {
     }
 
     public List<List<String>> listaPuestos() {
-        List<List<String>> lista
-                = new ArrayList<List<String>>();
+        List<List<String>> lista = new ArrayList<List<String>>();
         lista.add(new ArrayList<String>());
         lista.add(new ArrayList<String>());
         try {

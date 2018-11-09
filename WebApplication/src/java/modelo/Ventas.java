@@ -8,6 +8,8 @@ package modelo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -159,5 +161,65 @@ public class Ventas {
 
         return retorno;
     }
-    
+
+    public int obtenerUltimoId() {
+        int retorno = 0;
+        try {
+            clsConectar = new Conexion();
+            clsConectar.abrirConexion();
+            String query;
+            query = "SELECT idVenta FROM dbempresa.ventas ORDER BY idVenta DESC LIMIT 0,1;";
+            ResultSet consulta = clsConectar.conexionBD.createStatement().executeQuery(query);
+
+            if (consulta.next()) {
+                retorno = Integer.parseInt(consulta.getString("idVenta"));
+            }
+
+            clsConectar.cerrarConexion();
+
+        } catch (SQLException ex) {
+            clsConectar.cerrarConexion();
+            System.out.println(ex.getMessage());
+            return retorno;
+        }
+
+        return retorno;
+    }
+
+    public List<List<String>> obtenerUltimaVenta() {
+        List<List<String>> ultimaVenta = new ArrayList<List<String>>();
+        ultimaVenta.add(new ArrayList<String>());
+        ultimaVenta.add(new ArrayList<String>());
+        ultimaVenta.add(new ArrayList<String>());
+        ultimaVenta.add(new ArrayList<String>());
+        ultimaVenta.add(new ArrayList<String>());
+        ultimaVenta.add(new ArrayList<String>());
+        ultimaVenta.add(new ArrayList<String>());
+                                    
+        try {
+            clsConectar = new Conexion();
+            clsConectar.abrirConexion();
+            String query;
+            query = "SELECT * FROM dbempresa.ventas ORDER BY idVenta DESC LIMIT 0,1;";
+            ResultSet consulta = clsConectar.conexionBD.createStatement().executeQuery(query);
+
+            while (consulta.next()) {
+                ultimaVenta.get(0).add(consulta.getString("idVenta"));
+                ultimaVenta.get(1).add(consulta.getString("nofactura"));
+                ultimaVenta.get(2).add(consulta.getString("serie"));
+                ultimaVenta.get(3).add(consulta.getString("fechafactura"));
+                ultimaVenta.get(4).add(consulta.getString("idCliente"));
+                ultimaVenta.get(5).add(consulta.getString("idEmpleado"));
+                ultimaVenta.get(6).add(consulta.getString("fechaingreso"));
+            }
+
+            clsConectar.cerrarConexion();
+
+        } catch (SQLException ex) {
+            clsConectar.cerrarConexion();
+            System.out.println(ex.getMessage());
+        }
+        return ultimaVenta;
+    }
+
 }

@@ -50,7 +50,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>sr_ventas_detalle</servlet-name>
-        <url-pattern>/sr_ventas_detalle</url-pattern>
+        <url-pattern>/ventas/sr_ventas_detalle</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

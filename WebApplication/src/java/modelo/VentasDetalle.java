@@ -5,12 +5,19 @@
  */
 package modelo;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  *
  * @author jlemusu
  */
 public class VentasDetalle {
-    
+
+    PreparedStatement parametro;
+
+    private Conexion clsConectar;
+
     private int idVentaDetalle, idVenta, idProducto;
     private String cantidad, precioUnitario;
 
@@ -53,5 +60,34 @@ public class VentasDetalle {
     public void setPrecioUnitario(String precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
-    
+
+    public int ingresarDetalle() {
+        int retorno = 0;
+        try {
+
+            clsConectar = new Conexion();
+            clsConectar.abrirConexion();
+            String query;
+            query = "INSERT INTO ventas_detalle(idVenta, idProducto, cantidad, precio_unitario) "
+                    + "Values(?,?,?,?)";
+
+            parametro = (PreparedStatement) clsConectar.conexionBD.prepareStatement(query);
+            parametro.setInt(1, getIdVenta());
+            parametro.setInt(2, getIdProducto());
+            parametro.setString(3, getCantidad());
+            parametro.setString(4, getPrecioUnitario());
+            int executar = parametro.executeUpdate();
+            clsConectar.cerrarConexion();
+
+            retorno = executar;
+
+        } catch (SQLException ex) {
+            clsConectar.cerrarConexion();
+            System.out.println(ex.getMessage());
+            retorno = 0;
+        }
+
+        return retorno;
+    }
+
 }
