@@ -54,6 +54,19 @@ function obtenerValoresVenta(idVenta, factura, serie, fechafactura, idcliente, i
 
 function obtenerProductoId(id) {
     const txt_id_producto = document.querySelector("#txt_id_producto");
-    
+
     txt_id_producto.value = id;
+}
+
+function fechaDefault(el) {
+
+    const dt = new Date();
+
+    let month = dt.getMonth() + 1;
+    let day = dt.getDate();
+    let year = dt.getFullYear();
+
+    let txt_fecha = document.querySelector(el);
+
+    txt_fecha.value = year + '-' + month + '-' + day;
 }

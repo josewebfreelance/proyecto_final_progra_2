@@ -9,15 +9,30 @@
 <%@page import="modelo.Ventas"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    boolean enCurso = Boolean.parseBoolean(request.getParameter("enCurso"));
+    boolean nuevo = Boolean.parseBoolean(request.getParameter("nuevo"));
+    boolean edicion = Boolean.parseBoolean(request.getParameter("edicion"));
+
+    int idVentaEdicion = Integer.parseInt(request.getParameter("venta"));
+
     Ventas clsVentas = new Ventas();
     VentasDetalle clsVentasDetalle = new VentasDetalle();
     int idVenta = 0;
 
-    List<List<String>> ultimaVenta = clsVentas.obtenerUltimaVenta();
+    String filtroUltima = "ORDER BY idVenta DESC LIMIT 0,1";
+    String filtroEdicion = "where idVenta = " + idVentaEdicion;
+    
+    List<List<String>> ultimaVenta = clsVentas.obtenerVenta(filtroUltima);
+    List<List<String>> edicionVenta = clsVentas.obtenerVenta(filtroEdicion);
 
-    for (int i = 0; i < ultimaVenta.get(0).size(); i++) {
-        idVenta = Integer.parseInt(ultimaVenta.get(0).get(i));
+    if (nuevo == true && idVentaEdicion != 0) {
+        for (int i = 0; i < ultimaVenta.get(0).size(); i++) {
+            idVenta = Integer.parseInt(ultimaVenta.get(0).get(i));
+            
+        }
+    }
+
+    if (edicion == true) {
+        idVenta = idVentaEdicion;
     }
 
 %>
@@ -50,7 +65,8 @@
                         <div class="row">
                             <div class="form-group col-lg-2">
                                 <select id="txt_id_cliente" name="txt_id_cliente" class="form-control"  >
-                                    <%                                        List<List<String>> cliente = clsVentasDetalle.selectGenerico("SELECT idCliente, nombres FROM dbempresa.clientes", "idCliente", "nombres");
+                                    <%
+                                        List<List<String>> cliente = clsVentasDetalle.selectGenerico("SELECT idCliente, nombres FROM dbempresa.clientes", "idCliente", "nombres");
 
                                         for (int i = 0; i < cliente.get(0).size(); i++) {
                                             out.println("<option value='" + cliente.get(0).get(i) + "'>" + cliente.get(1).get(i) + "</option>");
@@ -73,15 +89,6 @@
                                 <input onchange="this.form.submit()" type="date" class="form-control" id="txt_fecha_ingreso" name="txt_fecha_ingreso" value="" placeholder="Fecha ingreso" required>                                               
                             </div>
                         </div>
-
-                        <!--<div class="modal-footer">
-                            <input type="submit" id="btnAgregar" name="btnAgregar" value="Agregar" class="btn btn-info" >
-                            <input type="submit" id="btnModificar" name="btnModificar" value="Modificar" class="btn btn-primary  btn-lg" >
-                            <input type="submit" id="btnEliminar" name ="btnEliminar" value="Eliminar" onclick="javascript:if (!confirm("¿Desea Eliminar?"))
-                                   return false" class="btn btn-danger btn-lg" >
-                                   <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                        </div>-->
-
                     </form>
 
                     <h3>Detalle</h3>
@@ -96,7 +103,7 @@
                         </thead>
                         <tbody>
                             <%
-                                if (enCurso == true) {
+                                if ((nuevo == true && idVentaEdicion != 0) || edicion == true) {
                                     DefaultTableModel tblModelo = new DefaultTableModel();
                                     tblModelo = clsVentasDetalle.llenarDetalleVenta(idVenta);
 
@@ -115,13 +122,14 @@
                                         out.println("<td><input class=\"form-control\" type=\"number\" name=\"txt_cantidad\" value=\"" + tblModelo.getValueAt(a, 3).toString() + "\"></td>");
                                         out.println("<td><input class=\"form-control\" type=\"number\" name=\"txt_precio_unitario\" value=\"" + tblModelo.getValueAt(a, 4).toString() + "\"></td>");
                                         out.println("</tr>");
-                                        
+
                                         // out.println("<script>obtenerProductoId('" + tblModelo.getValueAt(a, 2).toString() + "');</script>");
                                     }
                                 }
 
                             %>
                         <form method="post" action="sr_ventas_detalle">
+
                             <tr>
                                 <td></td>
                                 <td hidden="hidden"><input class="form-control" type="number" name="txt_iddetalle"></td>
@@ -146,7 +154,12 @@
             </div>
         </div>
 
-        <%            if (enCurso == true) {
+        <%
+            if (nuevo == true && idVentaEdicion == 0) {
+                out.println("<script>fechaDefault(\"#txt_fecha_factura\");</script>");
+            }
+            
+           if (nuevo == true && idVentaEdicion != 0) {              
                 for (int i = 0; i < ultimaVenta.get(0).size(); i++) {
 
                     out.println("<script>obtenerValoresVenta('" + ultimaVenta.get(0).get(i) + "',"
@@ -158,6 +171,20 @@
                             + "'" + ultimaVenta.get(6).get(i) + "');</script>");
                 }
             }
+            if (edicion == true) {
+                
+                for (int i = 0; i < edicionVenta.get(0).size(); i++) {
+
+                    out.println("<script>obtenerValoresVenta('" + edicionVenta.get(0).get(i) + "',"
+                            + "'" + edicionVenta.get(1).get(i) + "',"
+                            + "'" + edicionVenta.get(2).get(i) + "',"
+                            + "'" + edicionVenta.get(3).get(i) + "',"
+                            + "'" + edicionVenta.get(4).get(i) + "',"
+                            + "'" + edicionVenta.get(5).get(i) + "',"
+                            + "'" + edicionVenta.get(6).get(i) + "');</script>");
+                }
+            }
+            
         %>
 
     </body>

@@ -33,19 +33,25 @@ public class sr_ventas_detalle extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+
             VentasDetalle clsVentasDetalle = new VentasDetalle();
 
             clsVentasDetalle.setIdVenta(Integer.parseInt(request.getParameter("txt_idventa")));
             clsVentasDetalle.setIdProducto(Integer.parseInt(request.getParameter("txt_idproducto")));
             clsVentasDetalle.setCantidad(request.getParameter("txt_cantidad"));
             clsVentasDetalle.setPrecioUnitario(request.getParameter("txt_precio"));
+            
+            System.out.println(request.getParameter("txt_venta_edicion"));
+            System.out.println(request.getParameter("txt_idventa"));
 
-            out.println(clsVentasDetalle.getIdProducto());            
-
-            if (clsVentasDetalle.ingresarDetalle() > 0) {
-                response.sendRedirect(request.getContextPath() + "/ventas/crud_ventas.jsp?seleccionado=3&&enCurso=true");
+            if (request.getParameter("txt_idventa") == "" && clsVentasDetalle.ingresarDetalle() > 0) {
+                response.sendRedirect(request.getContextPath() + "/ventas/crud_ventas.jsp?seleccionado=3&&nuevo=true");
             }
 
+            if (request.getParameter("txt_idventa") != "" && clsVentasDetalle.ingresarDetalle() > 0) {
+                response.sendRedirect(request.getContextPath() + "/ventas/crud_ventas.jsp?seleccionado=3&&edicion=true&&venta="+Integer.parseInt(request.getParameter("txt_idventa")));
+
+            }
         }
     }
 
@@ -76,6 +82,7 @@ public class sr_ventas_detalle extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
     }
 
     /**

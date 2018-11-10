@@ -24,8 +24,8 @@
                     <%@include file="../componentes_estaticos/menu_navegacion.jsp" %>
                 </div>
                 <div class="col-lg-10">
-                    
-                    <a class="btn btn-primary" href="/proyecto_final_progra_2/ventas/crud_ventas.jsp?seleccionado=3">Nuevo</a>
+
+                    <a class="btn btn-primary" href="/proyecto_final_progra_2/ventas/crud_ventas.jsp?seleccionado=3&&nuevo=true&&venta=0">Nuevo</a>
 
                     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal_venta">Nuevo</button>
 
@@ -62,13 +62,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <!--<input type="submit" id="btnAgregar" name="btnAgregar" value="Agregar" class="btn btn-info btn-lg" >-->
+                                    <!--<div class="modal-footer">
+                                        <input type="submit" id="btnAgregar" name="btnAgregar" value="Agregar" class="btn btn-info btn-lg" >
                                         <input type="submit" id="btnModificar" name="btnModificar" value="Modificar" class="btn btn-primary  btn-lg" >
                                         <input type="submit" id="btnEliminar" name ="btnEliminar" value="Eliminar" onclick="javascript:if (!confirm('¿Desea Eliminar?'))
                                                     return false" class="btn btn-danger btn-lg" >
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </form>
 
@@ -85,12 +85,12 @@
                             <th>Empleado</th>
                             <th>Fecha ingreso</th>
                             </thead>
-                            <tbody id="tbl_estudiante">
+                            <tbody id="tbl_ventas">
                                 <%                                    Ventas clsVentas = new Ventas();
                                     DefaultTableModel tblModelo = new DefaultTableModel();
                                     tblModelo = clsVentas.llenarTabla();
                                     for (int a = 0; a < tblModelo.getRowCount(); a++) {
-                                        out.println("<tr data-idestudiante=" + tblModelo.getValueAt(a, 0).toString() + " data-idts=" + tblModelo.getValueAt(a, 0).toString() + " >");
+                                        out.println("<tr data-ventas=" + tblModelo.getValueAt(a, 0).toString() + " data-idts=" + tblModelo.getValueAt(a, 0).toString() + " >");
                                         out.println("<td>" + tblModelo.getValueAt(a, 1).toString() + "</td>");
                                         out.println("<td>" + tblModelo.getValueAt(a, 2).toString() + "</td>");
                                         out.println("<td>" + tblModelo.getValueAt(a, 3).toString() + "</td>");
@@ -108,38 +108,16 @@
             </div>
         </div>
 
-        <!--<script type="text/javascript">
-            $('#tbl_empleado').on('click', 'tr td', function (evt) {
-                var target, idEmpleados, idts, Nombres, Apellidos, Direccion, Telefono, DPI, Genero, FechaNacimiento, Puesto, Inicio_lab;
-
-
+        <script>
+            $('#tbl_ventas').on('click', 'tr td', function (event) {
+                let target, idVenta;
                 target = $(event.target);
-                idEmpleados = target.parent().data('id');
-                idts = target.parent().data('idpu');
-                Nombres = target.parents("tr").find("td").eq(1).html();
-                Apellidos = target.parents("tr").find("td").eq(2).html();
-                Direccion = target.parents("tr").find("td").eq(3).html();
-                Telefono = target.parents("tr").find("td").eq(4).html();
-                DPI = target.parents("tr").find("td").eq(5).html();
-                Genero = target.parents("tr").find("td").eq(6).html();
-                FechaNacimiento = target.parents("tr").find("td").eq(7).html();
-                // Puesto = target.parents("tr").find("td").eq(11).html();
-                Inicio_lab = target.parents("tr").find("td").eq(9).html();
+                idVenta = target.parent().data('ventas');
 
-                $("#txtId").val(idEmpleados);
-                $("#txtNombres").val(Nombres);
-                $("#txtApellidos").val(Apellidos);
-                $("#txtDireccion").val(Direccion);
-                $("#txtTelefono").val(Telefono);
-                $("#txtDpi").val(DPI);
-                $("#rBGenero").val(Genero);
-                $("#txtFNacimiento").attr("value", FechaNacimiento);
-                $("#droppuesto").val(idts);
-                $("#txtFILab").val(Inicio_lab);
-                $('#modal_empleado').modal('show');
+                $(window).attr('location', '/proyecto_final_progra_2/ventas/crud_ventas.jsp?seleccionado=3&&edicion=true&&venta=' + idVenta);
+                console.log(idVenta);
             });
-
-        </script>-->
+        </script>
 
     </body>
 </html>

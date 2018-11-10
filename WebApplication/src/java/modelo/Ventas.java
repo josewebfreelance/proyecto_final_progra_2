@@ -186,7 +186,7 @@ public class Ventas {
         return retorno;
     }
 
-    public List<List<String>> obtenerUltimaVenta() {
+    public List<List<String>> obtenerVenta(String ultima) {
         List<List<String>> ultimaVenta = new ArrayList<List<String>>();
         ultimaVenta.add(new ArrayList<String>());
         ultimaVenta.add(new ArrayList<String>());
@@ -200,7 +200,8 @@ public class Ventas {
             clsConectar = new Conexion();
             clsConectar.abrirConexion();
             String query;
-            query = "SELECT * FROM dbempresa.ventas ORDER BY idVenta DESC LIMIT 0,1;";
+            
+            query = "SELECT * FROM dbempresa.ventas " + ultima;
             ResultSet consulta = clsConectar.conexionBD.createStatement().executeQuery(query);
 
             while (consulta.next()) {

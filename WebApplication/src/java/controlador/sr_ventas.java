@@ -44,9 +44,11 @@ public class sr_ventas extends HttpServlet {
             clsVentas.setIdEmpleado(Integer.parseInt(request.getParameter("txt_id_empleado")));
             clsVentas.setFechaIngreso(request.getParameter("txt_fecha_ingreso"));
             out.println(clsVentas.getSerie());
+            
+            int ventaId = clsVentas.obtenerUltimoId();
 
             if (clsVentas.ingresar() > 0) {
-                response.sendRedirect(request.getContextPath() + "/ventas/crud_ventas.jsp?seleccionado=3&&enCurso=true");
+                response.sendRedirect(request.getContextPath() + "/ventas/crud_ventas.jsp?seleccionado=3&&nuevo=true&&venta=" + ventaId);
             }
 
         }
