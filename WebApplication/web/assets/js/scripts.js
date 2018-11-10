@@ -7,6 +7,14 @@
 let menus = [];
 let idNuevoDetalle = 1;
 
+let arraySerie = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
+
+const dt = new Date();
+
+let month = dt.getMonth() + 1;
+let day = dt.getDate();
+let year = dt.getFullYear();
+
 function cerrarSesion() {
     // $(window).replaceAll('location', '/proyecto_final_progra_2/');
     $(window).attr('location', '/proyecto_final_progra_2/index.jsp');
@@ -59,14 +67,21 @@ function obtenerProductoId(id) {
 }
 
 function fechaDefault(el) {
-
-    const dt = new Date();
-
-    let month = dt.getMonth() + 1;
-    let day = dt.getDate();
-    let year = dt.getFullYear();
-
     let txt_fecha = document.querySelector(el);
 
     txt_fecha.value = year + '-' + month + '-' + day;
+}
+
+function generarFactura(el, id) {
+    let txt_factura = document.querySelector(el);
+
+    txt_factura.value = month + "" + day + "" + id;
+}
+
+function generarSerieFactura(el) {
+    let txt_factura = document.querySelector(el);
+    let randomUno = arraySerie[Math.floor(Math.random()*arraySerie.length)];
+    let randomDos = arraySerie[Math.floor(Math.random()*arraySerie.length + 1)];
+
+    txt_factura.value = randomUno + "" + randomDos;
 }

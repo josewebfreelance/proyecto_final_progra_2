@@ -6,6 +6,9 @@
 
 <%@page import="java.util.List"%>
 <%@page import="modelo.Menu"%>
+<div class="header-menu">
+    <h4>SISAD</h4>  
+</div>
 <ol class="col-lg-12" role="group">
     <li>
         <%
@@ -21,9 +24,10 @@
                 listaMenu = clsMenu.obtenerMenu(Integer.parseInt(listaSize.get(0).get(i)));
 
                 if (Integer.parseInt(listaSize.get(1).get(i)) == 0) {
-                    out.println(listaSize.get(2).get(i));
+                    out.println("<span class=\"menu-header-group\">" + listaSize.get(2).get(i) + "</span>");
                 }
 
+                out.println("<ul class=\"menu-group\">");
                 for (int j = 0; j < listaMenu.get(0).size(); j++) {
                     if (listaMenu.get(3).get(j) != null) {
                         urlMenu = request.getContextPath() + listaMenu.get(3).get(j) + ".jsp?seleccionado=" + listaMenu.get(1).get(j);
@@ -31,13 +35,12 @@
                         urlMenu = request.getContextPath() + "/tablero/tablero.jsp?seleccionado=0";
                     }
 
-                    out.println("<ul>");
                     if (Integer.parseInt(listaMenu.get(1).get(j)) != 0 && Integer.parseInt(listaSize.get(0).get(i)) == Integer.parseInt(listaMenu.get(1).get(j))) {
                         out.println("<li><a href='" + urlMenu + "'>" + listaMenu.get(2).get(j) + "</a></li>");
                     }
-                    out.println("</ul>");
-                }
 
+                }
+                out.println("</ul>");
             }
         %>
     </li>

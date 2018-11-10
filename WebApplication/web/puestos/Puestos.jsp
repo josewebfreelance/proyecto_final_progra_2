@@ -27,11 +27,10 @@
                 <div class="col-lg-2">
                     <%@include file="../componentes_estaticos/menu_navegacion.jsp" %>
                 </div>
-                <div class="col-lg-10">                  
+                <div class="col-lg-9 vivify fadeIn delay-100">                  
 
 
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal_puesto">Nuevo</button>
-                    <button type="button" class="btn btn-info btn-lg" id="btnReg" onclick="opener.top.location.reload();window.close()" name="btnReg" data-toggle="modal"  >Regresar</button>
+                    <button type="button" class="btn btn-nuevo-registro vivify popInBottom delay-200" data-toggle="modal" data-target="#modal_puesto">+</button>
                     <!-- Modal -->
                     <div id="modal_puesto" class="modal fade" role="modal">
                         <div class="modal-dialog">
@@ -64,8 +63,10 @@
 
                         </div>
                     </div> 
+                    
+                    <h1><%= request.getServletPath().substring(request.getServletPath().lastIndexOf("/") + 1, request.getServletPath().lastIndexOf("."))%></h1>                    
                     <div class="table-responsive">
-                        <table class="table table-hover table-bordered">
+                        <table class="table table-hover">
                             <thead>
                             <th>Id</th>
                             <th>Puesto</th>

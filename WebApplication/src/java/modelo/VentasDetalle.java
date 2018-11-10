@@ -123,10 +123,13 @@ public class VentasDetalle {
         }
     }
 
-    public List<List<String>> selectGenerico(String queryDb, String id, String nombre) {
+    public List<List<String>> selectGenerico(String queryDb, String id, String nombre, String val2) {
         List<List<String>> clientes = new ArrayList<List<String>>();
         clientes.add(new ArrayList<String>());
         clientes.add(new ArrayList<String>());
+        if (val2 != "") {
+            clientes.add(new ArrayList<String>());
+        }
 
         try {
             clsConectar = new Conexion();
@@ -138,6 +141,9 @@ public class VentasDetalle {
             while (consulta.next()) {
                 clientes.get(0).add(consulta.getString(id));
                 clientes.get(1).add(consulta.getString(nombre));
+                if (val2 != "") {
+                clientes.get(2).add(consulta.getString(val2));                    
+                }
             }
 
             clsConectar.cerrarConexion();

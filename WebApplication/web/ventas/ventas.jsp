@@ -23,11 +23,9 @@
                 <div class="col-lg-2">
                     <%@include file="../componentes_estaticos/menu_navegacion.jsp" %>
                 </div>
-                <div class="col-lg-10">
+                <div class="col-lg-9 vivify fadeIn delay-100">
 
-                    <a class="btn btn-primary" href="/proyecto_final_progra_2/ventas/crud_ventas.jsp?seleccionado=3&&nuevo=true&&venta=0">Nuevo</a>
-
-                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal_venta">Nuevo</button>
+                    <a class="btn btn-nuevo-registro vivify popInBottom delay-200" href="/proyecto_final_progra_2/ventas/crud_ventas.jsp?seleccionado=3&&nuevo=true&&venta=0">+</a>
 
                     <div id="modal_venta" class="modal fade" role="dialog">
                         <div class="modal-dialog modal-lg">
@@ -75,8 +73,9 @@
                         </div>
                     </div>
 
+                    <h1><%= request.getServletPath().substring(request.getServletPath().lastIndexOf("/") + 1, request.getServletPath().lastIndexOf("."))%></h1>
                     <div class="table-responsive">
-                        <table class="table table-hover table-bordered">
+                        <table class="table table-hover">
                             <thead>
                             <th>No. factura</th>
                             <th>Serie</th>

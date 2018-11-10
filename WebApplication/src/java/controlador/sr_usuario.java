@@ -43,36 +43,27 @@ public class sr_usuario extends HttpServlet {
             Usuario clsUsuario = new Usuario();
             clsUsuario.setUsuario(request.getParameter("txt_usuario"));
             clsUsuario.setContrasenia(request.getParameter("txt_contrasenia"));
+            
+            System.out.println(request.getParameter("pantalla"));
 
-            elegirPantalla(request.getParameter("pantalla"), clsUsuario);
-            if (clsUsuario.iniciarSesion() > 0) {
-                sesion.setAttribute("usr", request.getParameter("txt_usuario"));
-                response.sendRedirect("tablero/tablero.jsp?seleccionado=0");
-            } else {
-                sesion.invalidate();
-                response.sendRedirect("index.jsp");
+            if (request.getParameter("pantalla").equals("login")) {
+                if (clsUsuario.iniciarSesion() > 0) {
+                    sesion.setAttribute("usr", request.getParameter("txt_usuario"));
+                    response.sendRedirect("tablero/tablero.jsp?seleccionado=0");
+                } else {
+                    sesion.invalidate();
+                    response.sendRedirect("index.jsp");
+                }
             }
-
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet sr_usuario</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet sr_usuario at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            
+            if (request.getParameter("pantalla").equals("registrar")) {
+                if (clsUsuario.registrar()> 0) {
+                    response.sendRedirect(request.getContextPath() + "/index.jsp?crearUsuario=true");
+                }                
+            }
+            
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(sr_usuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void elegirPantalla(String pantalla, Usuario entidad) throws NoSuchAlgorithmException, SQLException {
-        if (pantalla == "login") {
-            entidad.iniciarSesion();
-        }
-        if (pantalla == "registrar") {
-            entidad.registrar();
         }
     }
 
