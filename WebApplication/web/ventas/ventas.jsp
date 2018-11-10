@@ -80,7 +80,7 @@
                             <thead>
                             <th>No. factura</th>
                             <th>Serie</th>
-                            <th>Fecha</th>
+                            <th>Fecha factura</th>
                             <th>Cliente</th>
                             <th>Empleado</th>
                             <th>Fecha ingreso</th>
