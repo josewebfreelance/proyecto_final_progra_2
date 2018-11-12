@@ -22,8 +22,7 @@ public class Usuario {
     private Conexion clsConectar;
     PreparedStatement parametro;
 
-    private String usuario;
-    private String contrasenia;
+    private String usuario, contrasenia, imagen;
 
     public String getUsuario() {
         return usuario;
@@ -41,6 +40,14 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
     public int registrar() throws NoSuchAlgorithmException {
         int retorno = 0;
         try {
@@ -48,11 +55,12 @@ public class Usuario {
                 clsConectar = new Conexion();
                 clsConectar.abrirConexion();
                 String query;
-                query = "Insert into usuarios(usuario, contrasenia)"
-                        + "values(?,?)";
+                query = "Insert into usuarios(usuario, contrasenia,imagen)"
+                        + "values(?,?,?)";
                 parametro = (PreparedStatement) clsConectar.conexionBD.prepareStatement(query);
                 parametro.setString(1, getUsuario());
                 parametro.setString(2, sha256(getContrasenia()));
+                parametro.setString(3, getImagen());
                 int executar = parametro.executeUpdate();
                 clsConectar.cerrarConexion();
                 retorno = executar;
