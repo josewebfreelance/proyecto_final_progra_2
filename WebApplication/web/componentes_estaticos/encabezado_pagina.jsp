@@ -9,8 +9,9 @@
 <link rel="stylesheet" href="../assets/bootstrap/Bootstrap v3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="../assets/css/styles.css">
 <link rel="stylesheet" href="../assets/css/vivify.min.css">
-<link rel="stylesheet" href="../assets/fontawesome-5.5.0/css/all.css">
 <link rel="stylesheet" href="../assets/fontawesome-5.5.0/css/fontawesome.css">
+<link rel="stylesheet" href="../assets/fontawesome-5.5.0/css/all.css">
+<link rel="stylesheet" href="../assets/fontawesome-5.5.0/css/solid.css">
 <script src="../assets/bootstrap/js/jquery-3.3.1.js"></script>
 <script src="../assets/bootstrap/js/bootstrap.js"></script>
 <script src="../assets/js/scripts.js"></script>

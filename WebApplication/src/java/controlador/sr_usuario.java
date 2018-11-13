@@ -46,8 +46,14 @@ public class sr_usuario extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private File fileUploadDirectory;
+    
+    // Constantes donde se definen las rutas para guardar la imagen fisica
     public static final String UPLOAD_PATH = "/home/jlemusu/NetBeansProjects/proyecto_final_progra_2/WebApplication/web/assets/imagenes_cargadas";
+
+    // Nombre de la carpeta donde se guarda
     public static final String UPLOAD_DIR = "usuario";
+    
+    // Ruta para guardar en la Base de datos
     public static final String UPLOAD_PATH_DB = "/assets/imagenes_cargadas";
     public String dbFileName = "";
 
@@ -82,32 +88,49 @@ public class sr_usuario extends HttpServlet {
                 OutputStream salida = null;
                 InputStream i = null;
                 try {
+                    // Ruta de carga
                     String uploadPath = UPLOAD_PATH + File.separator + UPLOAD_DIR;
+                    
+                    // Si no se ha creado la carpeta se creara
                     fileUploadDirectory = new File(uploadPath);
                     if (!fileUploadDirectory.exists()) {
                         fileUploadDirectory.mkdirs();
                     }
 
+                    // Se obtiene la imagen desde el formulario
                     Part part = request.getPart("imagen");//
+                    
+                    // Se extrae el nombre del archivo
                     String fileName = getFileName(part);//file name
+                    
+                    // Se cambia el nombre del archivo para evitar duplicados
                     fileName = fileName.replaceAll("\\W", "_");
                     String fileNamePrefix = fileName + "_";
                     String fileNameSuffix = "." + getFileExtension(part);
                     
+                    // Se arma la ruta final
                     String rutaFinal = uploadPath + File.separator + fileNamePrefix + fileNameSuffix;
 
+                    // Se llena la variable que se encargara de la salida del archivo
                     salida = new FileOutputStream(new File(rutaFinal));
+                    
+                    // Contador
                     int read = 0;
 
+                    // Lectura del archivo
                     i = part.getInputStream();
                     final byte[] bytes = new byte[1024];
-
+                    
                     while ((read = i.read(bytes)) != -1) {
                         salida.write(bytes, 0, read);
                     }
+                    
+                    // Metodo set que agregara la ruta al formulario para ser guardada en la Base de Datos
                     clsUsuario.setImagen(UPLOAD_PATH_DB + File.separator + UPLOAD_DIR + File.separator + fileNamePrefix + fileNameSuffix);
                     
                 } catch (Exception e) {
+                    
+                    // Se cierra el archivo de esta manera se guarda fisicamente.
                     if (salida != null) {
                         salida.close();
                     }
@@ -120,9 +143,7 @@ public class sr_usuario extends HttpServlet {
                 /*
                     CARGA DE IMAGEN
                  */
-                System.out.println(clsUsuario.getUsuario());
-                                System.out.println(clsUsuario.getContrasenia());
-                                                System.out.println(clsUsuario.getImagen());
+                
                 if (clsUsuario.registrar() > 0) {
                     response.sendRedirect(request.getContextPath() + "/index.jsp?crearUsuario=true");
                 }

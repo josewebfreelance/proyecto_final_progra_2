@@ -111,24 +111,48 @@ and open the template in the editor.
     - REGISTRO
 */
 
-.img-registrar-usuario {
-    width: 150px;
-    height: 150px;
+.content-img-registrar-usuario {
+    position: relative;
+}
+
+.content-img-registrar-usuario .img-registrar-usuario {
+    width: 100px;
+    height: 100px;
     display: block;
     border-radius: 100px;
     background: url("../imagenes_cargadas/usuario/avatar.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0 auto;
+    opacity: 1;
 }
 
-.img-registrar-usuario + input[type="file"] {
-    width: 150px;
-    height: 150px;
+.content-img-registrar-usuario .img-registrar-usuario + input[type="file"] {
+    width: 100px;
+    height: 100px;
     display: block;
     position: absolute;
-    left: calc((100% - 150px) / 2);
+    left: calc((100% - 100px) / 2);
     top: 0;
     z-index: 9;
     opacity: 0;
+}
+
+.content-img-registrar-usuario .img-registrar-usuario + input[type="file"] + .fas {
+    z-index: 5;
+    position: absolute;
+    top: calc((100px - 50px) / 2);
+    width: 50px;
+    height: 50px;
+    left: calc((100% - 60px) / 2);
+    font-size: 5rem;
+    opacity: 0;
+}
+
+.content-img-registrar-usuario:hover .img-registrar-usuario {
+    opacity: .8;
+}
+
+.content-img-registrar-usuario:hover .img-registrar-usuario + input[type="file"] + .fas {
+    opacity: 1;
 }
