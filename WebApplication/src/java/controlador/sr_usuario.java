@@ -46,8 +46,9 @@ public class sr_usuario extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private File fileUploadDirectory;
-    public static final String UPLOAD_PATH = "/home/jlemusus/NetBeansProjects/proyecto_final_progra_2/";
-    public static final String UPLOAD_DIR = "imagenes_cargadas";
+    public static final String UPLOAD_PATH = "/home/jlemusu/NetBeansProjects/proyecto_final_progra_2/WebApplication/web/assets/imagenes_cargadas";
+    public static final String UPLOAD_DIR = "usuario";
+    public static final String UPLOAD_PATH_DB = "/assets/imagenes_cargadas";
     public String dbFileName = "";
 
     @Override
@@ -92,8 +93,10 @@ public class sr_usuario extends HttpServlet {
                     fileName = fileName.replaceAll("\\W", "_");
                     String fileNamePrefix = fileName + "_";
                     String fileNameSuffix = "." + getFileExtension(part);
+                    
+                    String rutaFinal = uploadPath + File.separator + fileNamePrefix + fileNameSuffix;
 
-                    salida = new FileOutputStream(new File(uploadPath + File.separator + fileNamePrefix + fileNameSuffix));
+                    salida = new FileOutputStream(new File(rutaFinal));
                     int read = 0;
 
                     i = part.getInputStream();
@@ -102,6 +105,8 @@ public class sr_usuario extends HttpServlet {
                     while ((read = i.read(bytes)) != -1) {
                         salida.write(bytes, 0, read);
                     }
+                    clsUsuario.setImagen(UPLOAD_PATH_DB + File.separator + UPLOAD_DIR + File.separator + fileNamePrefix + fileNameSuffix);
+                    
                 } catch (Exception e) {
                     if (salida != null) {
                         salida.close();
@@ -115,7 +120,9 @@ public class sr_usuario extends HttpServlet {
                 /*
                     CARGA DE IMAGEN
                  */
-                
+                System.out.println(clsUsuario.getUsuario());
+                                System.out.println(clsUsuario.getContrasenia());
+                                                System.out.println(clsUsuario.getImagen());
                 if (clsUsuario.registrar() > 0) {
                     response.sendRedirect(request.getContextPath() + "/index.jsp?crearUsuario=true");
                 }

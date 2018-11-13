@@ -105,3 +105,30 @@ and open the template in the editor.
 .btn-nuevo-registro:hover {
     color: #ffffff;
 }    
+
+/*
+    USUARIOS
+    - REGISTRO
+*/
+
+.img-registrar-usuario {
+    width: 150px;
+    height: 150px;
+    display: block;
+    border-radius: 100px;
+    background: url("../imagenes_cargadas/usuario/avatar.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+}
+
+.img-registrar-usuario + input[type="file"] {
+    width: 150px;
+    height: 150px;
+    display: block;
+    position: absolute;
+    left: calc((100% - 150px) / 2);
+    top: 0;
+    z-index: 9;
+    opacity: 0;
+}
