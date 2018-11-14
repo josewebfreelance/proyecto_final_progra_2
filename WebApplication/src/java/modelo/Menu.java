@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -56,7 +57,7 @@ public class Menu {
         this.url = url;
     }
 
-    public List<List<String>> obtenerListaMenu() {
+    /*public List<List<String>> obtenerListaMenu() {
         List<List<String>> lista = new ArrayList<List<String>>();
         lista.add(new ArrayList<String>());
         lista.add(new ArrayList<String>());
@@ -82,8 +83,53 @@ public class Menu {
             System.out.println(ex.getMessage());
         }
         return lista;
+    }*/
+
+public List<Menu> obtenerListaMenu() {
+
+        List<Menu> listaa = new ArrayList();
+        try {
+            clsConectar = new Conexion();
+            clsConectar.abrirConexion();
+            String query;
+            query = "SELECT * FROM menu";
+            ResultSet consulta = clsConectar.conexionBD.createStatement().executeQuery(query);
+
+            while (consulta.next()) {
+                Menu item = new Menu();
+                int idOb = Integer.parseInt(consulta.getString("idmenu"));
+                int padreOb = Integer.parseInt(consulta.getString("padre"));
+                String menuOb = consulta.getString("menu");
+                String urlOb = consulta.getString("url");
+
+                    item.setId(idOb);
+                    item.setPadre(padreOb);
+                    item.setMenu(menuOb);
+                    item.setUrl(urlOb);
+
+                listaa.add(item);
+
+            }
+
+            System.out.println(listaa.size());
+            /*for (int i = 0; i < listaa.size(); i++) {
+                System.out.println(listaa);
+            }*/
+
+            clsConectar.cerrarConexion();
+
+        } catch (SQLException ex) {
+            clsConectar.cerrarConexion();
+            System.out.println(ex.getMessage());
+        }
+        return listaa;
     }
-    
+
+    @Override
+    public String toString() {
+        return "{" + "id:" + id + ", padre:" + padre + ", menu:\"" + menu + "\", url:\"" + url + "\"}";
+    }
+
     public List<List<String>> obtenerMenu(int id) {
         List<List<String>> lista = new ArrayList<List<String>>();
         lista.add(new ArrayList<String>());
@@ -111,5 +157,4 @@ public class Menu {
         }
         return lista;
     }
-
 }

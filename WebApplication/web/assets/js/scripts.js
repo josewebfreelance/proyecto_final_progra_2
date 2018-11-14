@@ -20,13 +20,17 @@ function cerrarSesion() {
     $(window).attr('location', '/proyecto_final_progra_2/index.jsp');
 }
 
-function obtenerMenu(id, padre, menu, url) {
-    let obj = {};
-    obj.id = id;
-    obj.padre = padre;
-    obj.menu = menu;
-    obj.url = url;
-    menus.push(obj);
+function menuHijos(id, obj) {
+    console.log(id);
+    console.log(obj)
+}
+
+function obtenerMenu(obj) {
+
+    obj.forEach(item => {
+        menuHijos(item.id, item)
+    });
+
 }
 
 function activarMenu(seleccionado, comparar) {

@@ -13,16 +13,21 @@
     <li>
         <%
             Menu clsMenu = new Menu();
-            List<List<String>> listaSize, listaMenu;
-            listaSize = clsMenu.obtenerListaMenu();
+            List<List<String>> listaMenu;
+            List<Menu>listaSize = clsMenu.obtenerListaMenu();
 
             String urlMenu = "";
 
+            out.println(listaSize);
+            
             String pagina_activa = (String) request.getParameter("seleccionado");
 
             for (int i = 0; i < listaSize.get(0).size(); i++) {
+
                 listaMenu = clsMenu.obtenerMenu(Integer.parseInt(listaSize.get(0).get(i)));
 
+                // out.println("<script>obtenerMenu('"+listaSize.get(0).get(i)+"');</script>");
+                
                 if (Integer.parseInt(listaSize.get(1).get(i)) == 0) {
                     out.println("<span class=\"menu-header-group\">" + listaSize.get(2).get(i) + "</span>");
                 }
