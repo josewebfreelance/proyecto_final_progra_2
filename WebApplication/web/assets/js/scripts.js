@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 // Menus obtenidos
-let menus = [];
 let idNuevoDetalle = 1;
+let menus;
+let menuDinamico = document.querySelector(".menu-dinamico");
 
 let arraySerie = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T'];
 
@@ -25,11 +26,11 @@ function menuHijos(id, obj) {
     console.log(obj)
 }
 
-function obtenerMenu(obj) {
-
-    obj.forEach(item => {
-        menuHijos(item.id, item)
-    });
+function obtenerMenu(menus) {
+   const test = "oks";
+    console.log(menuDinamico);
+    
+    //menuDinamico.innerHTML = test;
 
 }
 
@@ -84,8 +85,8 @@ function generarFactura(el, id) {
 
 function generarSerieFactura(el) {
     let txt_factura = document.querySelector(el);
-    let randomUno = arraySerie[Math.floor(Math.random()*arraySerie.length)];
-    let randomDos = arraySerie[Math.floor(Math.random()*arraySerie.length + 1)];
+    let randomUno = arraySerie[Math.floor(Math.random() * arraySerie.length)];
+    let randomDos = arraySerie[Math.floor(Math.random() * arraySerie.length + 1)];
 
     txt_factura.value = randomUno + "" + randomDos;
 }

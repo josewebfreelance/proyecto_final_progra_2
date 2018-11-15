@@ -9,9 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,72 +20,43 @@ public class Menu {
     private Conexion clsConectar;
     PreparedStatement parametro;
 
-    private int id, padre;
-    private String menu, url;
+    public static class NodoDB {
 
-    public int getId() {
-        return id;
-    }
+        private int id, padre;
+        private String menu, url;
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getPadre() {
-        return padre;
-    }
-
-    public void setPadre(int padre) {
-        this.padre = padre;
-    }
-
-    public String getMenu() {
-        return menu;
-    }
-
-    public void setMenu(String menu) {
-        this.menu = menu;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    /*public List<List<String>> obtenerListaMenu() {
-        List<List<String>> lista = new ArrayList<List<String>>();
-        lista.add(new ArrayList<String>());
-        lista.add(new ArrayList<String>());
-        lista.add(new ArrayList<String>());
-        lista.add(new ArrayList<String>());
-        try {
-            clsConectar = new Conexion();
-            clsConectar.abrirConexion();
-            String query;
-            query = "SELECT * FROM menu";
-            ResultSet consulta = clsConectar.conexionBD.createStatement().executeQuery(query);
-
-            while (consulta.next()) {
-                lista.get(0).add(consulta.getString("idmenu"));
-                lista.get(1).add(consulta.getString("padre"));
-                lista.get(2).add(consulta.getString("menu"));
-                lista.get(3).add(consulta.getString("url"));
-            }
-            clsConectar.cerrarConexion();
-
-        } catch (SQLException ex) {
-            clsConectar.cerrarConexion();
-            System.out.println(ex.getMessage());
+        public NodoDB(int id, int padre, String menu, String url) {
+            this.id = id;
+            this.padre = padre;
+            this.menu = menu;
+            this.url = url;
         }
-        return lista;
-    }*/
 
-public List<Menu> obtenerListaMenu() {
+    }
 
-        List<Menu> listaa = new ArrayList();
+    public static class Nodo {
+
+        private int id, padre;
+        private String menu, url;
+        List<Nodo> hijos = new ArrayList<>();
+
+        public Nodo(int id, String menu, String url) {
+            this.id = id;
+            this.menu = menu;
+            this.url = url;
+        }
+
+        @Override
+        public String toString() {
+            return "{" + "id: " + id + ", padre:" + padre + ", menu: '" + menu + "', url: '" + url + "', hijos:" + hijos + "}";
+        }
+
+    }
+
+    public Nodo obtenerMenu() {
+        List<NodoDB> listaDB = new ArrayList<>();
+        Nodo respuesta = null;
+
         try {
             clsConectar = new Conexion();
             clsConectar.abrirConexion();
@@ -96,65 +65,43 @@ public List<Menu> obtenerListaMenu() {
             ResultSet consulta = clsConectar.conexionBD.createStatement().executeQuery(query);
 
             while (consulta.next()) {
-                Menu item = new Menu();
                 int idOb = Integer.parseInt(consulta.getString("idmenu"));
                 int padreOb = Integer.parseInt(consulta.getString("padre"));
                 String menuOb = consulta.getString("menu");
                 String urlOb = consulta.getString("url");
 
-                    item.setId(idOb);
-                    item.setPadre(padreOb);
-                    item.setMenu(menuOb);
-                    item.setUrl(urlOb);
-
-                listaa.add(item);
-
+                listaDB.add(new NodoDB(idOb, padreOb, menuOb, urlOb));
             }
 
-            System.out.println(listaa.size());
-            /*for (int i = 0; i < listaa.size(); i++) {
-                System.out.println(listaa);
-            }*/
-
-            clsConectar.cerrarConexion();
+            Nodo raiz = null;
+            for (NodoDB db : listaDB) {
+                if (db.padre == 0) {
+                    raiz = new Nodo(db.id, db.menu, db.url);
+                } else {
+                    recursivo(raiz, db);
+                }
+            }
+            
+            respuesta = raiz;
+            
+            System.out.println(raiz);
 
         } catch (SQLException ex) {
             clsConectar.cerrarConexion();
             System.out.println(ex.getMessage());
         }
-        return listaa;
+        
+        return respuesta;
     }
 
-    @Override
-    public String toString() {
-        return "{" + "id:" + id + ", padre:" + padre + ", menu:\"" + menu + "\", url:\"" + url + "\"}";
-    }
-
-    public List<List<String>> obtenerMenu(int id) {
-        List<List<String>> lista = new ArrayList<List<String>>();
-        lista.add(new ArrayList<String>());
-        lista.add(new ArrayList<String>());
-        lista.add(new ArrayList<String>());
-        lista.add(new ArrayList<String>());
-        try {
-            clsConectar = new Conexion();
-            clsConectar.abrirConexion();
-            String query;
-            query = "SELECT * FROM menu where padre = '" + id + "'";
-            ResultSet consulta = clsConectar.conexionBD.createStatement().executeQuery(query);
-
-            while (consulta.next()) {
-                lista.get(0).add(consulta.getString("idmenu"));
-                lista.get(1).add(consulta.getString("padre"));
-                lista.get(2).add(consulta.getString("menu"));
-                lista.get(3).add(consulta.getString("url"));
+    static void recursivo(Nodo nodo, NodoDB db) {
+        if (db.padre == nodo.id) {
+            nodo.hijos.add(new Nodo(db.id, db.menu, db.url));
+        } else {
+            for (Nodo hijo : nodo.hijos) {
+                recursivo(hijo, db);
             }
-            clsConectar.cerrarConexion();
-
-        } catch (SQLException ex) {
-            clsConectar.cerrarConexion();
-            System.out.println(ex.getMessage());
         }
-        return lista;
     }
+
 }
