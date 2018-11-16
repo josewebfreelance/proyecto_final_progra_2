@@ -4,14 +4,14 @@
     Author     : jlemus
 --%>
 <%@page import="modelo.Menu"%>
-<%
-    Menu clsMenu = new Menu();
-    out.println("<script> menus = " + clsMenu.obtenerMenu() + "; obtenerMenu(menus);</script>");
-%>
+<% Menu clsMenu = new Menu(); %>
 <div class="header-menu">
-    <h4>SISAD</h4>  
+    <h4>SISAD</h4>
 </div>
-<ol class="col-lg-12 menu-dinamico" role="group">
-    <li>
-    </li>
-</ol>
+<div class="col-lg-12 menu-dinamico" role="group">
+</div>
+<script>
+    menus = <%= clsMenu.obtenerMenu() %>
+    menuDinamico = document.querySelector(".menu-dinamico");
+    obtenerMenu();
+</script>

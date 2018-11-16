@@ -8,6 +8,14 @@ and open the template in the editor.
     Author     : jlemusus
 */
 
+.modal-open .modal {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-backdrop.in {
+    display: none;
+}
+
 .navbar.navbar-default {
     width: 83.33333333%;
     margin: 0 0 0 calc(100% - 83.33333333%);
@@ -17,7 +25,7 @@ and open the template in the editor.
     MENU
 */
 
-.container-fluid > .row > .col-lg-2 {
+.container-fluid>.row>.col-lg-2 {
     position: fixed;
     height: 100vh;
     top: 0;
@@ -26,33 +34,35 @@ and open the template in the editor.
     padding-bottom: 15px;
 }
 
-.container-fluid > .row > .col-lg-2 > .header-menu {
+.container-fluid>.row>.col-lg-2>.header-menu {
     margin: -15px;
     background-color: #455A64;
     padding: 16px 15px 2px 15px;
     margin-bottom: 5px;
 }
 
-.container-fluid > .row > .col-lg-2 > .header-menu > * {
+.container-fluid>.row>.col-lg-2>.header-menu>* {
     text-transform: uppercase;
     font-size: 2rem;
     letter-spacing: 11px;
     text-align: center;
 }
 
-.container-fluid > .row > .col-lg-2 a {
+.container-fluid>.row>.col-lg-2 a {
     color: #ffffff;
 }
 
-.container-fluid > .row > .col-lg-2 ol, ul, li {
+.container-fluid>.row>.col-lg-2 ol,
+ul,
+li {
     list-style-type: none;
 }
 
-.container-fluid > .row > .col-lg-2 ol li {
+.container-fluid>.row>.col-lg-2 ol li {
     font-size: 1.6rem
 }
 
-.container-fluid > .row > .col-lg-2 .menu-header-group {
+.container-fluid>.row>.col-lg-2 .menu-header-group {
     width: 100%;
     display: block;
     padding: 7px 15px;
@@ -62,29 +72,45 @@ and open the template in the editor.
     color: #80CBC4 !important;
 }
 
-.container-fluid > .row > .col-lg-2 .menu-group {
+.menu-dinamico {
+    padding: 0;
+    margin-top: 15px;
+}
+
+.menu-dinamico a {
+    padding: 5px;
+    margin-bottom: 6px;
+    text-decoration: underline;
+}
+
+.menu-dinamico>ul {
+    padding: 0;
+}
+
+.menu-dinamico>ul>li>h5 {
+    background-color: #37474F;
+    padding: 8px 10px;
+    margin: 0;
+    border-radius: 2px;
+}
+
+.menu-dinamico>ul>li ul {
     padding-left: 15px;
 }
 
-.container-fluid > .row > .col-lg-2 .menu-group > li {
-    padding: 4px 15px;
-}
-
-.container-fluid > .row > .col-lg-2 .menu-group > li > a {
-    text-decoration: none;
-}
-
-.container-fluid > .row > .col-lg-2 .menu-group > li:hover {
-    cursor: pointer;
+.menu-dinamico>ul>li>ul>li>h5 {
     background-color: #455A64;
-    border-radius: 4px;
+    padding: 8px 10px;
+    border-radius: 2px;
 }
+
 
 /*
     CONTENEDOR PRINCIPAL
 */
 
-.container-fluid > .row > .col-lg-9, .col-lg-10 {
+.container-fluid>.row>.col-lg-9,
+.col-lg-10 {
     margin-left: 227.66px;
     padding-left: 30px;
 }
@@ -104,7 +130,7 @@ and open the template in the editor.
 
 .btn-nuevo-registro:hover {
     color: #ffffff;
-}    
+}
 
 /*
     USUARIOS
@@ -127,7 +153,7 @@ and open the template in the editor.
     opacity: 1;
 }
 
-.content-img-registrar-usuario .img-registrar-usuario + input[type="file"] {
+.content-img-registrar-usuario .img-registrar-usuario+input[type="file"] {
     width: 100px;
     height: 100px;
     display: block;
@@ -138,7 +164,7 @@ and open the template in the editor.
     opacity: 0;
 }
 
-.content-img-registrar-usuario .img-registrar-usuario + input[type="file"] + .fas {
+.content-img-registrar-usuario .img-registrar-usuario+input[type="file"]+.fas {
     z-index: 5;
     position: absolute;
     top: calc((100px - 50px) / 2);
@@ -153,6 +179,6 @@ and open the template in the editor.
     opacity: .8;
 }
 
-.content-img-registrar-usuario:hover .img-registrar-usuario + input[type="file"] + .fas {
+.content-img-registrar-usuario:hover .img-registrar-usuario+input[type="file"]+.fas {
     opacity: 1;
 }

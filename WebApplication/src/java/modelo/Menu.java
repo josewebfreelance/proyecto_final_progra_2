@@ -40,10 +40,11 @@ public class Menu {
         private String menu, url;
         List<Nodo> hijos = new ArrayList<>();
 
-        public Nodo(int id, String menu, String url) {
+        public Nodo(int id, int padre, String menu, String url) {
             this.id = id;
             this.menu = menu;
             this.url = url;
+            this.padre = padre;
         }
 
         @Override
@@ -76,7 +77,7 @@ public class Menu {
             Nodo raiz = null;
             for (NodoDB db : listaDB) {
                 if (db.padre == 0) {
-                    raiz = new Nodo(db.id, db.menu, db.url);
+                    raiz = new Nodo(db.id, db.padre, db.menu, db.url);
                 } else {
                     recursivo(raiz, db);
                 }
@@ -96,7 +97,7 @@ public class Menu {
 
     static void recursivo(Nodo nodo, NodoDB db) {
         if (db.padre == nodo.id) {
-            nodo.hijos.add(new Nodo(db.id, db.menu, db.url));
+            nodo.hijos.add(new Nodo(db.id, db.padre, db.menu, db.url));
         } else {
             for (Nodo hijo : nodo.hijos) {
                 recursivo(hijo, db);

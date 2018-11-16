@@ -4,6 +4,7 @@
     Author     : jlemusus
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="modelo.VentasDetalle"%>
 <%@page import="javax.swing.table.DefaultTableModel"%>
 <%@page import="modelo.Ventas"%>
