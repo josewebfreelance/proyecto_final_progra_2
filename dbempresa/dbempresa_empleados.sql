@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `dbempresa` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `dbempresa`;
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: dbempresa
 -- ------------------------------------------------------
--- Server version	5.5.5-10.1.34-MariaDB
+-- Server version	5.7.24-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,7 +29,7 @@ CREATE TABLE `empleados` (
   `direccion` varchar(80) DEFAULT NULL,
   `telefono` varchar(25) DEFAULT NULL,
   `DPI` varchar(15) DEFAULT NULL,
-  `genero` bit(1) DEFAULT NULL,
+  `genero` int(1) DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
   `idPuesto` smallint(6) DEFAULT NULL,
   `fecha_inicio_labores` date DEFAULT NULL,
@@ -39,7 +37,7 @@ CREATE TABLE `empleados` (
   PRIMARY KEY (`idEmpleado`),
   KEY `idPuesto_idx` (`idPuesto`),
   CONSTRAINT `idPuesto` FOREIGN KEY (`idPuesto`) REFERENCES `puestos` (`idPuesto`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,6 +46,7 @@ CREATE TABLE `empleados` (
 
 LOCK TABLES `empleados` WRITE;
 /*!40000 ALTER TABLE `empleados` DISABLE KEYS */;
+INSERT INTO `empleados` VALUES (1,'Jose','Lemus','Guatemala','52636258','52562',0,'1989-06-05',1,'2018-02-03','2018-02-04 00:00:00');
 /*!40000 ALTER TABLE `empleados` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-29  4:29:31
+-- Dump completed on 2018-11-16 15:37:51

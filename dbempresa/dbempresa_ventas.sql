@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `dbempresa` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `dbempresa`;
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: dbempresa
 -- ------------------------------------------------------
--- Server version	5.5.5-10.1.34-MariaDB
+-- Server version	5.7.24-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -27,17 +25,17 @@ DROP TABLE IF EXISTS `ventas`;
 CREATE TABLE `ventas` (
   `idVenta` int(11) NOT NULL AUTO_INCREMENT,
   `nofactura` int(11) DEFAULT NULL,
-  `serie` char(1) DEFAULT NULL,
+  `serie` char(3) DEFAULT NULL,
   `fechafactura` date DEFAULT NULL,
   `idcliente` int(11) DEFAULT NULL,
   `idempleado` int(11) DEFAULT NULL,
-  `fechaingreso` datetime DEFAULT NULL,
+  `fechaingreso` date DEFAULT NULL,
   PRIMARY KEY (`idVenta`),
   KEY `idcliente_idx` (`idcliente`),
   KEY `idempleado_idx` (`idempleado`),
   CONSTRAINT `idcliente` FOREIGN KEY (`idcliente`) REFERENCES `clientes` (`idCliente`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `idempleado` FOREIGN KEY (`idempleado`) REFERENCES `empleados` (`idEmpleado`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,6 +44,7 @@ CREATE TABLE `ventas` (
 
 LOCK TABLES `ventas` WRITE;
 /*!40000 ALTER TABLE `ventas` DISABLE KEYS */;
+INSERT INTO `ventas` VALUES (1,999,'JJ','2018-05-02',1,1,'2018-02-05'),(10,55,'j','2018-11-08',1,1,'2018-11-08'),(11,55,'j','2018-11-08',1,1,'2018-11-08'),(12,55,'ss','2018-11-03',1,1,'2018-11-08'),(13,6666,'f','2018-11-17',1,1,'2018-11-08'),(14,897,'jj','2018-11-23',1,1,'2018-11-08'),(15,150,'mm','2018-11-03',1,1,'2018-11-08'),(16,2361,'mm','2018-11-16',1,1,'2018-11-08'),(17,1990,'po','2018-11-23',1,1,'2018-11-08'),(18,1989,'po','2018-11-16',1,1,'2018-11-08'),(19,2005,'AA','2018-11-22',1,1,'2018-11-09'),(20,92522,'aa','2018-11-02',1,1,'2018-11-09'),(21,555,'AA','2018-11-03',1,1,'2018-11-09'),(22,6669,'AB','2018-11-10',1,1,'2018-11-09'),(23,1500,'AB','2018-11-03',1,1,'2018-11-09'),(24,2500,'BA','2018-11-22',1,1,'2018-11-09'),(25,3000,'BA','2018-11-22',1,1,'2018-11-09');
 /*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-29  4:29:33
+-- Dump completed on 2018-11-16 15:37:51

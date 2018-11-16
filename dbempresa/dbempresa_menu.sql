@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `dbempresa` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `dbempresa`;
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.24, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: dbempresa
 -- ------------------------------------------------------
--- Server version	5.5.5-10.1.34-MariaDB
+-- Server version	5.7.24-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,7 +28,7 @@ CREATE TABLE `menu` (
   `menu` varchar(45) NOT NULL,
   `url` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`idmenu`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +37,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (1,0,'Producto',NULL),(2,1,'Marcas',NULL),(3,0,'Ventas','ventas/ventas'),(4,3,'Clientes',NULL),(5,3,'Empleados',NULL),(6,5,'Puestos',NULL),(7,0,'Compras',NULL),(8,7,'Proveedores',NULL);
+INSERT INTO `menu` VALUES (1,0,'menu',''),(2,1,'Productos',''),(3,2,'Marcas','tablero/tablero.jsp'),(5,1,'Ventas',''),(9,5,'Venta','ventas/ventas.jsp'),(10,5,'Clientes','tablero/tablero.jsp'),(11,5,'Empleados',''),(12,11,'Empleado','empleados/Empleados.jsp'),(13,11,'Puestos','puestos/Puestos.jsp'),(14,1,'Compras',''),(15,14,'Compra','tablero/tablero.jsp'),(16,14,'Proveedores','tablero/tablero.jsp');
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-29  4:29:29
+-- Dump completed on 2018-11-16 15:37:50
