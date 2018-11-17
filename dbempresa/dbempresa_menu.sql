@@ -28,7 +28,7 @@ CREATE TABLE `menu` (
   `menu` varchar(45) NOT NULL,
   `url` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`idmenu`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (1,0,'menu',''),(2,1,'Productos',''),(3,2,'Marcas','tablero/tablero.jsp'),(5,1,'Ventas',''),(9,5,'Venta','ventas/ventas.jsp'),(10,5,'Clientes','tablero/tablero.jsp'),(11,5,'Empleados',''),(12,11,'Empleado','empleados/Empleados.jsp'),(13,11,'Puestos','puestos/Puestos.jsp'),(14,1,'Compras',''),(15,14,'Compra','tablero/tablero.jsp'),(16,14,'Proveedores','tablero/tablero.jsp');
+INSERT INTO `menu` VALUES (1,0,'menu',''),(2,1,'Productos',''),(3,2,'Marcas','marcas/Marcas.jsp'),(5,1,'Ventas',''),(9,5,'Venta','ventas/ventas.jsp'),(10,5,'Clientes','tablero/tablero.jsp'),(11,5,'Empleados',''),(12,11,'Empleado','empleados/Empleados.jsp'),(13,11,'Puestos','puestos/Puestos.jsp'),(14,1,'Compras',''),(15,14,'Compra','tablero/tablero.jsp'),(16,14,'Proveedores','tablero/tablero.jsp'),(17,2,'Producto','productos/Productos.jsp');
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-16 15:37:50
+-- Dump completed on 2018-11-17  0:12:29

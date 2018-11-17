@@ -35,7 +35,7 @@ CREATE TABLE `productos` (
   PRIMARY KEY (`idProducto`),
   KEY `idMarca_idx` (`idMarca`),
   CONSTRAINT `idMarca` FOREIGN KEY (`idMarca`) REFERENCES `marcas` (`idmarca`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'Camara',1,'Camara','',5000.00,5500.00,20,'2018-02-05 00:00:00'),(2,'Portatil',3,'Computadora portatil','',6000.00,6800.00,15,'2018-02-05 00:00:00');
+INSERT INTO `productos` VALUES (1,'Camara',1,'Camara','',5000.00,5500.00,20,'2018-02-05 00:00:00'),(2,'Portatil',3,'Computadora portatil','',6000.00,6800.00,15,'2018-02-05 00:00:00'),(3,'stelevision',2,'ss',NULL,3500.00,4000.00,5,'2018-11-23 00:00:00'),(4,'tele',2,'5',NULL,5000.00,5000.00,5,'2018-11-07 00:00:00');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-16 15:37:51
+-- Dump completed on 2018-11-17  0:12:29
