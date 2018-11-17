@@ -24,6 +24,14 @@
         <servlet-name>sr_ventas_detalle</servlet-name>
         <servlet-class>controlador.sr_ventas_detalle</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MarcasServlet</servlet-name>
+        <servlet-class>controlador.MarcasServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductosServlet</servlet-name>
+        <servlet-class>controlador.ProductosServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>sr_usuario</servlet-name>
         <url-pattern>/sr_usuario</url-pattern>
@@ -51,6 +59,14 @@
     <servlet-mapping>
         <servlet-name>sr_ventas_detalle</servlet-name>
         <url-pattern>/ventas/sr_ventas_detalle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MarcasServlet</servlet-name>
+        <url-pattern>/marcas/MarcasServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductosServlet</servlet-name>
+        <url-pattern>/productos/ProductosServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
